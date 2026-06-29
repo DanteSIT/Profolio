@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YouTube Downloader - A Python/tkinter application for downloading and managing YouTube videos">
+    <title>YouTube Downloader Project - Dante's Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <a href="index.html#main-content" class="skip-to-main">Skip to main content</a>
+
+    <header role="banner">
+        <div class="header-container">
+            <div class="logo-section">
+                <h1><a href="index.html" style="color: #0066FF; text-decoration: none;">Dante Dominic Lespoir</a></h1>
+                <p class="tagline">Full-Stack Developer | Linux Administrator | Game Developer</p>
+            </div>
+            <nav role="navigation" aria-label="Main navigation">
+                <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#skills">Skills</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="index.html#experience">Experience</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" role="main">
+        <!-- Hero Section -->
+        <section class="hero" aria-labelledby="project-title">
+            <div class="hero-content">
+                <h2 id="project-title">YouTube Downloader</h2>
+                <p>A comprehensive Python GUI application for downloading and managing YouTube content</p>
+            </div>
+        </section>
+
+        <!-- Project Content -->
+        <section class="content-section" aria-labelledby="overview">
+            <div class="container">
+                <h2 id="overview">Project Overview</h2>
+                <div class="project-detail">
+                    <p>
+                        The YouTube Downloader is a feature-rich desktop application built with Python and tkinter. It provides an intuitive interface for downloading YouTube videos with advanced options including playlist support, quality selection, audio extraction, and comprehensive download history tracking.
+                    </p>
+
+                    <div class="project-info-grid">
+                        <div class="info-box">
+                            <h3>Technology Stack</h3>
+                            <ul>
+                                <li>Python 3.x</li>
+                                <li>tkinter (GUI Framework)</li>
+                                <li>yt-dlp (Video Download Engine)</li>
+                                <li>Threading (Async Operations)</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-box">
+                            <h3>Key Features</h3>
+                            <ul>
+                                <li>Single video & playlist downloads</li>
+                                <li>Quality selection & format options</li>
+                                <li>Audio-only extraction</li>
+                                <li>VR/360° video metadata preservation</li>
+                                <li>Download history & queue management</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-box">
+                            <h3>Project Goals</h3>
+                            <ul>
+                                <li>Simplify video downloading process</li>
+                                <li>Provide flexible format options</li>
+                                <li>Create intuitive user experience</li>
+                                <li>Support advanced video types</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-box">
+                            <h3>Development Experience</h3>
+                            <ul>
+                                <li>UI/UX design with tkinter</li>
+                                <li>Asynchronous programming</li>
+                                <li>File system operations</li>
+                                <li>Error handling & logging</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="content-section" aria-labelledby="features">
+            <div class="container">
+                <h2 id="features">Main Features</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <h3>📥 Easy Download Management</h3>
+                        <p>
+                            Simple, intuitive interface for adding videos to your download queue. Paste a YouTube link, select your preferences, and let the application handle the rest. Support for both individual videos and complete playlists.
+                        </p>
+                    </div>
+
+                    <div class="feature-item">
+                        <h3>🎬 Flexible Format Options</h3>
+                        <p>
+                            Choose from multiple video qualities (1080p, 720p, 480p, etc.) and audio formats. Extract audio-only files in MP3 or other formats, perfect for creating music libraries from video content.
+                        </p>
+                    </div>
+
+                    <div class="feature-item">
+                        <h3>🔄 Playlist Support</h3>
+                        <p>
+                            Efficiently download entire YouTube playlists with customizable settings. Maintain the original order and metadata, making it easy to organize large video collections.
+                        </p>
+                    </div>
+
+                    <div class="feature-item">
+                        <h3>📊 Download History</h3>
+                        <p>
+                            Keep track of all downloaded videos with detailed information including URL, format, date, and file location. Never forget where you saved that video you downloaded.
+                        </p>
+                    </div>
+
+                    <div class="feature-item">
+                        <h3>🎯 Queue Management</h3>
+                        <p>
+                            Manage multiple downloads in a queue, pause/resume operations, and view real-time progress. Intelligent scheduling prevents system overload during batch operations.
+                        </p>
+                    </div>
+
+                    <div class="feature-item">
+                        <h3>360° Video Support</h3>
+                        <p>
+                            Special handling for VR and 360-degree videos. Preserves metadata that maintains the immersive experience and ensures compatibility with VR video players.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Details -->
+        <section class="content-section" aria-labelledby="technical">
+            <div class="container">
+                <h2 id="technical">Technical Implementation</h2>
+                
+                <div class="technical-section">
+                    <h3>Architecture</h3>
+                    <p>
+                        The application follows a modular architecture with clear separation between the UI layer (tkinter) and the download engine (yt-dlp). Threading is used to keep the UI responsive while downloads happen in the background.
+                    </p>
+                </div>
+
+                <div class="technical-section">
+                    <h3>User Interface</h3>
+                    <p>
+                        Features a modern red and black sidebar layout with intuitive navigation. The interface is organized into logical sections: input area, options panel, progress display, and history viewer. Real-time status updates keep users informed of ongoing operations.
+                    </p>
+                </div>
+
+                <div class="technical-section">
+                    <h3>Download Engine</h3>
+                    <p>
+                        Leverages yt-dlp for robust video downloading with extensive format support. Custom configurations handle various video types, quality preferences, and post-processing operations like audio extraction.
+                    </p>
+                </div>
+
+                <div class="technical-section">
+                    <h3>Data Persistence</h3>
+                    <p>
+                        Download history is stored in a local database or JSON file, allowing users to access past downloads and resume incomplete operations. User preferences are saved for convenience.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Outcomes -->
+        <section class="content-section" aria-labelledby="learnings">
+            <div class="container">
+                <h2 id="learnings">Learning Outcomes</h2>
+                <div class="learnings-grid">
+                    <div class="learning-card">
+                        <h3>GUI Development Mastery</h3>
+                        <p>Deep understanding of tkinter widgets, layout managers, and event handling. Ability to create responsive, user-friendly desktop applications with professional appearance.</p>
+                    </div>
+                    <div class="learning-card">
+                        <h3>Asynchronous Programming</h3>
+                        <p>Practical experience with threading and async operations to prevent UI blocking. Learned proper synchronization and thread-safe operations in Python applications.</p>
+                    </div>
+                    <div class="learning-card">
+                        <h3>Third-Party Integration</h3>
+                        <p>Successfully integrated and configured complex external library (yt-dlp) with custom parameters. Understanding of library documentation and troubleshooting integration issues.</p>
+                    </div>
+                    <div class="learning-card">
+                        <h3>Error Handling</h3>
+                        <p>Implemented comprehensive error handling for network failures, file system issues, and invalid inputs. Created user-friendly error messages that guide users toward solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="content-section contact-cta" aria-labelledby="discuss">
+            <div class="container" style="text-align: center;">
+                <h2 id="discuss">Interested in Discussing This Project?</h2>
+                <p>Have questions about the implementation, want to see a demo, or need something similar built? Let's connect!</p>
+                <a href="index.html#contact" class="cta-button">Get in Touch</a>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="container">
+            <p>&copy; 2024 Dante. All rights reserved. | <a href="index.html" style="color: inherit;">Back to Portfolio</a></p>
+        </div>
+    </footer>
+
+    <style>
+        .project-detail {
+            margin-top: var(--spacing-lg);
+        }
+
+        .project-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-xl) 0;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, var(--color-blue-primary) 0%, var(--color-blue-dark) 100%);
+            color: var(--color-white);
+            padding: var(--spacing-lg);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px var(--color-shadow);
+        }
+
+        .info-box h3 {
+            color: var(--color-white);
+            border: none;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .info-box ul {
+            list-style: none;
+        }
+
+        .info-box li {
+            padding: var(--spacing-xs) 0;
+            position: relative;
+            padding-left: var(--spacing-md);
+        }
+
+        .info-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--color-white);
+            font-weight: bold;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .feature-item {
+            background: var(--color-white);
+            padding: var(--spacing-lg);
+            border-radius: 8px;
+            border-left: 4px solid var(--color-blue-primary);
+            box-shadow: 0 2px 8px var(--color-shadow);
+            transition: var(--transition);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px var(--color-shadow);
+        }
+
+        .feature-item h3 {
+            color: var(--color-black);
+            border: none;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .technical-section {
+            background: var(--color-white);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px var(--color-shadow);
+        }
+
+        .technical-section h3 {
+            color: var(--color-blue-primary);
+            border: none;
+        }
+
+        .learnings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .learning-card {
+            background: var(--color-light-gray);
+            padding: var(--spacing-lg);
+            border-radius: 8px;
+            border-top: 3px solid var(--color-blue-primary);
+        }
+
+        .learning-card h3 {
+            color: var(--color-black);
+            border: none;
+        }
+
+        .contact-cta {
+            background: linear-gradient(135deg, var(--color-blue-primary) 0%, var(--color-blue-dark) 100%);
+            color: var(--color-white);
+        }
+
+        .contact-cta h2 {
+            color: var(--color-white);
+            border-bottom-color: var(--color-white);
+        }
+
+        .contact-cta p {
+            color: var(--color-light-gray);
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .project-info-grid,
+            .features-list,
+            .learnings-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <script src="script.js"></script>
+</body>
+</html>
