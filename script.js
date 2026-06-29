@@ -1,5 +1,39 @@
 // Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', function() {
+    // ============================================
+    // THEME SWITCHER
+    // ============================================
+    const themeButtons = document.querySelectorAll('.theme-btn');
+    const htmlElement = document.documentElement;
+    
+    // Load saved theme from localStorage
+    const savedTheme = localStorage.getItem('theme') || 'default';
+    htmlElement.setAttribute('data-theme', savedTheme);
+    updateActiveTheme(savedTheme);
+    
+    // Theme button click handler
+    themeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const theme = this.getAttribute('data-theme');
+            htmlElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            updateActiveTheme(theme);
+        });
+    });
+    
+    // Update active button indicator
+    function updateActiveTheme(theme) {
+        themeButtons.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.getAttribute('data-theme') === theme) {
+                btn.classList.add('active');
+            }
+        });
+    }
+    
+    // ============================================
+    // MOBILE MENU TOGGLE
+    // ============================================
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
 
