@@ -21,6 +21,20 @@
                 <h1>Dante Dominic Lespoir</h1>
                 <p class="tagline">Full-Stack Developer | Linux Administrator | Game Developer</p>
             </div>
+            
+            <!-- Theme Switcher -->
+            <div class="theme-switcher" role="group" aria-label="Theme switcher">
+                <button class="theme-btn" data-theme="default" aria-label="Default theme" title="Default Theme">
+                    🎨
+                </button>
+                <button class="theme-btn" data-theme="light" aria-label="Light theme" title="Light Theme">
+                    ☀️
+                </button>
+                <button class="theme-btn" data-theme="dark" aria-label="Dark theme" title="Dark Theme">
+                    🌙
+                </button>
+            </div>
+            
             <nav role="navigation" aria-label="Main navigation">
                 <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span></span>
@@ -33,7 +47,7 @@
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#experience">Experience</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="#c&p"> Certifications & Pariticipations</a></li>
+                    <li><a href="#c&p">Certifications & Participations</a></li>
                 </ul>
             </nav>
         </div>
@@ -90,26 +104,23 @@
                                 <span class="credential-title">National Diploma in Information Systems
                                     Engineering</span>
                                 <span class="credential-status">Final Year (3-Year Course)</span>
-                                <img src="../Profolio/assets/"
-                                    alt="National Infromation Systems Engineering Diploma Certificate"
-                                    class="credential-logo">
                             </li>
                             <li>
                                 <span class="credential-title">Advanced Certification in Electrical Electronics</span>
                                 <span class="credential-status">(2-Year Course)</span>
-                                <a href="../Profolio/assets/Advance Certificate Electrical Electronics-1.png" target="_blank"><img
-                                        width="200px" src="../Profolio/assets/Advance Certificate Electrical Electronics-1.png"
-                                        alt="Advance Certificate-1" class="credential-logo"></a>
-                                <a href="../Profolio/assets/Advance Certificate Electrical Electronics-2.png" target="_blank"><img
-                                        width="200px" src="../Profolio/assets/Advance Certificate Electrical Electronics-2.png"
-                                        alt="Advance Certificate-2" class="credential-logo"></a>
+                                <div class="credential-images">
+                                    <a href="../Profolio//assets/Advance Certificate Electrical Electronics-1.png" target="_blank"><img
+                                            src="../Profolio//assets/Advance Certificate Electrical Electronics-1.png"
+                                            alt="Advance Certificate-1" class="credential-logo"></a>
+                                    <a href="../Profolio//assets/Advance Certificate Electrical Electronics-2.png" target="_blank"><img
+                                            src="../Profolio//assets/Advance Certificate Electrical Electronics-2.png"
+                                            alt="Advance Certificate-2" class="credential-logo"></a>
+                                </div>
 
                             </li>
                             <li>
                                 <span class="credential-title">JavaScript & Web Development Certification</span>
                                 <span class="credential-provider">Codecademy</span>
-                                <img src="/images/webdevcert.png" alt="Web Development Certificate"
-                                    class="credential-logo">
 
                             </li>
                         </ul>
@@ -302,33 +313,32 @@
             </div>
         </section>
 
-        <section id="c&p" class="content-section" aria-labelledby="Certificate&Participations">
-            <div class="credentials">
-                <h3>Certifications & Participations</h3>
-                <ul class="credential-list">
-                    <li>
-                        <span class="credential-title">Hackathon 2026-20205-2024</span>
-                        <span class="credential-description">Participated in Hackathon for the past 3 years comming in
-                            6th(solo), 6th(Team), 5th(Team) </span><br>
-                        <span style="display: flex; flex-direction: row; gap: 10px;margin-left: 10px;">
-                            <a href="../Profolio/assets/Hackathon-1.png" target="_blank"><img width="200px"
-                                    src="../Profolio/assets/Hackathon-1.png" alt="Hackathons" class="credential-logo"></a>
-                            <a href="../Profolio/assets/Hackathon-2.png" target="_blank"><img width="200px"
-                                    src="../Profolio/assets/Hackathon-2.png" alt="Hackathons" class="credential-logo"></a>
-                            <a href="../Profolio/assets/Hackathon-3.png" target="_blank"><img width="200px"
-                                    src="../Profolio/assets/Hackathon-3.png" alt="Hackathons" class="credential-logo"></a>
-                        </span>
-                    </li>
-                </ul>
-                <ul class="credential-list">
-                    <li>
-                        <span class="credential-title">WEB Application Build</span>
-                        <span class="credential-description">Participated in a online Workshop hosted by Kevin orm DICT
-                            Seychelles</span><br>
-                        <a href="../Profolio/assets/Dante DICT.png" target="_blank"><img width="200px" src="../Profolio/assets/Dante DICT.png"
-                                alt="Certification Logo" class="credential-logo"></a>
-                    </li>
-                </ul>
+        <section id="c&p" class="content-section" aria-labelledby="cert-title">
+            <div class="container">
+                <h2 id="cert-title">Certifications & Participations</h2>
+                <div class="credentials-section">
+                    <div class="credential-item">
+                        <h3>Hackathon Participations</h3>
+                        <p class="credential-description">Participated in Hackathon for the past 3 years, placing 6th (solo), 6th (Team), and 5th (Team)</p>
+                        <div class="credential-images-grid">
+                            <a href="../Profolio/assets/Hackathon-1.png" target="_blank"><img
+                                    src="../Profolio/assets/Hackathon-1.png" alt="Hackathon 2024" class="credential-logo"></a>
+                            <a href="../Profolio/assets/Hackathon-2.png" target="_blank"><img
+                                    src="../Profolio/assets/Hackathon-2.png" alt="Hackathon 2025" class="credential-logo"></a>
+                            <a href="./assets/Hackathon-3.png" target="_blank"><img
+                                    src="../Profolio/assets/Hackathon-3.png" alt="Hackathon 2026" class="credential-logo"></a>
+                        </div>
+                    </div>
+
+                    <div class="credential-item">
+                        <h3>Web Application Workshop</h3>
+                        <p class="credential-description">Participated in an online Workshop hosted by Kevin from DICT Seychelles on Web Application Development</p>
+                        <div class="credential-images-grid">
+                            <a href="../Profolio/assets/Dante DICT.png" target="_blank"><img src="../Profolio/assets/Dante DICT.png"
+                                    alt="Web Application Workshop Certification" class="credential-logo"></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
