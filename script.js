@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
             menuToggle.setAttribute('aria-expanded', !isExpanded);
         });
 
-        // Close menu when a link is clicked
+        // Close menu when clicked
         const navLinks = navMenu.querySelectorAll('a');
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Close menu when clicking outside
+    // Close menu 
     document.addEventListener('click', function(event) {
         const isClickInsideMenu = navMenu && navMenu.contains(event.target);
         const isClickOnToggle = menuToggle && menuToggle.contains(event.target);
@@ -33,6 +33,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+
+///IMPORTED FROM WEB3FORMS - Note my code 
 // Form Handling
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
@@ -90,14 +93,14 @@ if (contactForm) {
         // --- WEB3FORMS INTEGRATION ENDS HERE ---
     });
 }   
-// Notification system
+// Notification 
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.setAttribute('role', 'alert');
     notification.textContent = message;
 
-    // Add styles for notification
+    //  styles notification
     notification.style.cssText = `
         position: fixed;
         top: 20px;
@@ -123,14 +126,14 @@ function showNotification(message, type = 'info') {
 
     document.body.appendChild(notification);
 
-    // Remove notification after 4 seconds
+    // Remove notification  4 seconds
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease';
         setTimeout(() => notification.remove(), 300);
     }, 4000);
 }
 
-// Smooth scroll behavior enhancement
+// Smooth scroll 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
