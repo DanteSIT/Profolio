@@ -80,7 +80,7 @@ if (contactForm) {
         const data = Object.fromEntries(formData);
 
         // Validate form data
-        if (!data.name || !data.email || !data.subject || !data.message) {
+        if (!data.name || !data.email || !data.country || !data.subject || !data.message) {
             showNotification('Please fill in all required fields', 'error');
             return;
         }
