@@ -56,7 +56,7 @@
    DARK THEME (Black)
    ============================================ */
 [data-theme="dark"] {
-    --color-white: #1a1a1a;
+    --color-white: #4b4b4b;
     --color-light-gray: #2d2d2d;
     --color-gray: #3a3a3a;
     --color-blue-primary: #4d9fff;
@@ -313,11 +313,30 @@ nav {
    HERO SECTION
    ============================================ */
 
+/* Fullscreen Background Video */
+#bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    object-fit: cover;
+}
+.content {
+    position: relative;
+    z-index: 1;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+ /*hero start*/
 .hero {
-    background: linear-gradient(135deg, var(--color-blue-primary) 0%, var(--color-blue-dark) 100%);
+
     color: var(--color-white);
     padding: var(--spacing-xxl) var(--spacing-lg);
     text-align: center;
+    
 }
 
 .hero-content h2 {
@@ -708,8 +727,9 @@ nav {
     font-family: var(--font-primary);
     font-size: 1rem;
     transition: var(--transition);
-}
 
+
+}
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
