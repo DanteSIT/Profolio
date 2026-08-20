@@ -1,0 +1,97 @@
+<?php
+$page_title = "YouTube Downloader - Dante's Portfolio";
+$page_desc  = 'YouTube Downloader - A comprehensive Python and tkinter desktop application for downloading and managing video media.';
+$page_hero  = 'hero-bg-youtube';
+$hero_title = 'YouTube Downloader';
+$hero_subtitle = 'A desktop GUI application built in Python for seamless video downloading, playlist management, and metadata parsing.';
+$is_project = true;
+include __DIR__ . '/includes/header.php';
+?>
+
+        <section class="content-section" aria-labelledby="overview">
+            <div class="container">
+                <h2 id="overview">Project Overview</h2>
+                <div class="project-detail">
+                    <p>
+                        This project solves the challenge of downloading high-fidelity video and audio media directly via a streamlined desktop graphical user interface. By combining Python's powerful scripting capabilities with standard interface toolkits, the application abstracts complex command-line streaming parameters into a clean, easy-to-configure layout.
+                    </p>
+
+                    <div class="project-info-grid">
+                        <div class="info-box">
+                            <h3>Technologies Used</h3>
+                            <ul>
+                                <li>Python 3</li>
+                                <li>tkinter (GUI Framework)</li>
+                                <li>yt-dlp Engine</li>
+                                <li>FFmpeg (Media Merging)</li>
+                            </ul>
+                        </div>
+                        <div class="info-box">
+                            <h3>Key Features</h3>
+                            <ul>
+                                <li>Batch Playlist Extraction</li>
+                                <li>Dynamic Resolution Selection</li>
+                                <li>Audio Conversion (.mp3)</li>
+                                <li>Live Progress Bar Metrics</li>
+                            </ul>
+                        </div>
+                        <div class="info-box">
+                            <h3>Development Goals</h3>
+                            <ul>
+                                <li>Asynchronous Execution Threading</li>
+                                <li>Avoid Interface Freezes During Downloads</li>
+                                <li>Clean Error Validation Handlers</li>
+                                <li>Local Storage Configuration</li>
+                            </ul>
+                        </div>
+                        <div class="info-box">
+                            <h3>UX Focus</h3>
+                            <ul>
+                                <li>Accessible Form Fields</li>
+                                <li>High Contrast Status Warnings</li>
+                                <li>Keyboard Tab Navigation</li>
+                                <li>Clear Output Directory Choices</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" aria-labelledby="features">
+            <div class="container">
+                <h2 id="features">Implementation Highlights</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <h3>🧵 Multi-Threaded Processing</h3>
+                        <p>
+                            Implemented Python's `threading` library to isolate download loops from the primary UI loop. This keeps the application responsive, allowing users to safely pause downloads or monitor accurate data rates.
+                        </p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🛠️ Dynamic Format Resolution Parsing</h3>
+                        <p>
+                            Integrated backend hooks into `yt-dlp` to query streaming manifests synchronously, serving only available video payloads (e.g., 1080p, 720p) directly to the user's dropdown select box.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" aria-labelledby="learnings">
+            <div class="container">
+                <h2 id="learnings">Key Technical Insights</h2>
+                <div class="learnings-grid">
+                    <div class="learning-card">
+                        <h3>Process Management</h3>
+                        <p>Mastered managing external runtime binaries like FFmpeg directly from system sub-processes while maintaining streams clean of memory leaks.</p>
+                    </div>
+                    <div class="learning-card">
+                        <h3>GUI State Patterns</h3>
+                        <p>Architected clean widget binding states to dynamically lock form controls during execution cycles to ensure pristine application flows.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<?php include __DIR__ . '/includes/footer.php'; ?>

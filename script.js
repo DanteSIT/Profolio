@@ -6,21 +6,38 @@ document.addEventListener('DOMContentLoaded', function() {
     const themeButtons = document.querySelectorAll('.theme-btn');
     const htmlElement = document.documentElement;
     
-    // Load saved theme from localStorage
-    const savedTheme = localStorage.getItem('theme') || 'default';
-    htmlElement.setAttribute('data-theme', savedTheme);
-    updateActiveTheme(savedTheme);
-    
-    // Theme button click handler
+    // Resolve initial theme: saved preference, else OS preference
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('theme'); } catch (e) {}
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'default');
+
+    // Apply a theme to the document and the navbar buttons
+    function applyTheme(theme) {
+        htmlElement.setAttribute('data-theme', theme);
+        updateActiveTheme(theme);
+    }
+
+    // Persist the choice, then apply it
+    function setTheme(theme) {
+        try { localStorage.setItem('theme', theme); } catch (e) {}
+        applyTheme(theme);
+    }
+
+    // Keep all open pages/tabs in sync
+    window.addEventListener('storage', function (event) {
+        if (event.key === 'theme') {
+            applyTheme(event.newValue || 'default');
+        }
+    });
+
+    // Navbar theme button click handler
     themeButtons.forEach(button => {
         button.addEventListener('click', function() {
-            const theme = this.getAttribute('data-theme');
-            htmlElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            updateActiveTheme(theme);
+            setTheme(this.getAttribute('data-theme'));
         });
     });
-    
+
     // Update active button indicator
     function updateActiveTheme(theme) {
         themeButtons.forEach(btn => {
@@ -30,6 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Apply the initial theme
+    applyTheme(initialTheme);
     
     // ============================================
     // MOBILE MENU TOGGLE
@@ -66,6 +86,41 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // ============================================
+    // CERT TABS (lazy load images on first click)
+    // ============================================
+    const certTabs = document.querySelectorAll('.cert-tab');
+    const certPanels = document.querySelectorAll('.cert-panel');
+
+    certTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const target = this.getAttribute('data-cert');
+
+            certTabs.forEach(t => t.classList.remove('cert-tab--active'));
+            certPanels.forEach(p => p.classList.remove('cert-panel--active'));
+
+            this.classList.add('cert-tab--active');
+            const panel = document.getElementById('cert-' + target);
+            if (panel) {
+                panel.classList.add('cert-panel--active');
+                panel.querySelectorAll('.lazy-img').forEach(loadLazyImg);
+            }
+        });
+    });
+
+    function loadLazyImg(img) {
+        if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+            img.addEventListener('load', function() {
+                this.classList.add('loaded');
+            });
+        }
+    }
+
+    // load images in the default active tab
+    document.querySelectorAll('.cert-panel--active .lazy-img').forEach(loadLazyImg);
 });
 
 
@@ -140,7 +195,7 @@ function showNotification(message, type = 'info') {
         top: 20px;
         right: 20px;
         padding: 1rem 1.5rem;
-        border-radius: 5px;
+        border-radius: 0;
         font-weight: 500;
         z-index: 1000;
         animation: slideIn 0.3s ease;
@@ -148,13 +203,13 @@ function showNotification(message, type = 'info') {
     `;
 
     if (type === 'success') {
-        notification.style.backgroundColor = '#4caf50';
+        notification.style.backgroundColor = '#27ae60';
         notification.style.color = 'white';
     } else if (type === 'error') {
-        notification.style.backgroundColor = '#f44336';
+        notification.style.backgroundColor = '#e74c3c';
         notification.style.color = 'white';
     } else {
-        notification.style.backgroundColor = '#2196f3';
+        notification.style.backgroundColor = '#3498db';
         notification.style.color = 'white';
     }
 
@@ -216,7 +271,7 @@ style.textContent = `
     input:focus-visible,
     textarea:focus-visible,
     a:focus-visible {
-        outline: 2px solid #0052CC;
+        outline: 2px solid #3498db;
         outline-offset: 2px;
     }
 `;

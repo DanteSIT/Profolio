@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Networking &amp; API Knowledge Base</title>
+<style>
+:root {
+    --bg: #f0f1f3;
+    --card: #ffffff;
+    --text: #1a1d21;
+    --muted: #6b7280;
+    --blue: #2563eb;
+    --blue-hover: #1d4ed8;
+    --green: #16a34a;
+    --red: #dc2626;
+    --orange: #ea580c;
+    --purple: #7c3aed;
+    --border: #e2e4e9;
+    --shadow: rgba(0,0,0,0.06);
+    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'Courier New', Courier, monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); color: var(--text); background: var(--bg); line-height:1.7; }
+
+/* NAV */
+.top-nav { position:sticky; top:0; z-index:100; background:#1a1d21; padding:0.75rem 2rem; display:flex; align-items:center; gap:2rem; flex-wrap:wrap; }
+.top-nav a { color:#fff; font-size:0.85rem; text-decoration:none; opacity:0.8; transition:0.2s; }
+.top-nav a:hover { opacity:1; text-decoration:underline; }
+.top-nav .brand { color:var(--blue); font-weight:700; font-size:1rem; opacity:1; }
+
+/* HERO */
+.hero-banner { background: linear-gradient(135deg, #1a1d21 0%, #0f3460 100%); color:#fff; padding:4rem 2rem; text-align:center; }
+.hero-banner h1 { font-size:2.5rem; margin-bottom:0.5rem; }
+.hero-banner p { font-size:1.1rem; opacity:0.8; max-width:700px; margin:0 auto; }
+
+/* SECTIONS */
+.container { max-width:1100px; margin:0 auto; padding:2rem; }
+section { margin-bottom:3rem; }
+section h2 { font-size:1.8rem; border-bottom:3px solid var(--blue); padding-bottom:0.5rem; margin-bottom:1.5rem; color:#1a1d21; }
+section h3 { font-size:1.3rem; margin:1.5rem 0 0.75rem; color:#0f3460; }
+section h4 { font-size:1.1rem; margin:1rem 0 0.5rem; color:var(--blue); }
+
+.card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:1.5rem; margin-bottom:1.5rem; box-shadow:0 1px 3px var(--shadow); }
+.card.highlight { border-left:4px solid var(--blue); }
+.card.warning { border-left:4px solid var(--orange); }
+.card.success { border-left:4px solid var(--green); }
+
+/* CODE */
+pre { background:#1a1d21; color:#e2e8f0; padding:1.25rem; border-radius:6px; overflow-x:auto; font-size:0.85rem; line-height:1.5; margin:1rem 0; font-family:var(--mono); }
+code { font-family:var(--mono); font-size:0.9em; }
+:not(pre) > code { background:#e5e7eb; padding:0.15em 0.4em; border-radius:3px; color:#dc2626; }
+.kw { color:#c084fc; }
+.str { color:#34d399; }
+.cmt { color:#6b7280; font-style:italic; }
+.fn { color:#60a5fa; }
+.num { color:#fbbf24; }
+
+/* TABLES */
+table { width:100%; border-collapse:collapse; margin:1rem 0; font-size:0.9rem; }
+th, td { padding:0.6rem 1rem; text-align:left; border-bottom:1px solid var(--border); }
+th { background:#f8fafc; font-weight:600; }
+tr:hover { background:#f8fafc; }
+
+/* SVG DIAGRAMS */
+.diagram-wrap { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:1.5rem; margin:1.5rem 0; text-align:center; overflow-x:auto; }
+.diagram-wrap svg { max-width:100%; height:auto; }
+.diagram-caption { font-size:0.85rem; color:var(--muted); margin-top:0.75rem; font-style:italic; }
+
+/* ANIMATIONS */
+@keyframes flowRight { 0% { stroke-dashoffset:200; } 100% { stroke-dashoffset:0; } }
+@keyframes fadeInUp { from { opacity:0; transform:translateY(15px); } to { opacity:1; transform:translateY(0); } }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+.animate-flow { stroke-dasharray:200; stroke-dashoffset:200; animation: flowRight 1.5s ease forwards; }
+.animate-fade { opacity:0; animation: fadeInUp 0.6s ease forwards; }
+.delay1 { animation-delay:0.3s; }
+.delay2 { animation-delay:0.6s; }
+.delay3 { animation-delay:0.9s; }
+.delay4 { animation-delay:1.2s; }
+.delay5 { animation-delay:1.5s; }
+.delay6 { animation-delay:1.8s; }
+
+/* COLLAPSIBLE */
+.collapsible { cursor:pointer; user-select:none; }
+.collapsible::before { content:'\25B6'; display:inline-block; margin-right:0.5rem; font-size:0.8rem; transition:transform 0.2s; }
+.collapsible.open::before { transform:rotate(90deg); }
+.collapsible-content { display:none; margin-top:1rem; }
+.collapsible-content.open { display:block; }
+
+/* RESPONSIVE */
+@media(max-width:768px) {
+    .hero-banner h1 { font-size:1.6rem; }
+    .container { padding:1rem; }
+    .top-nav { padding:0.5rem 1rem; gap:1rem; }
+    .top-nav a { font-size:0.75rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-nav">
+    <a href="#" class="brand">Networking Guide</a>
+    <a href="#api-basics">APIs</a>
+    <a href="#api-lifecycle">Request/Response</a>
+    <a href="#api-simple">Build Simple API</a>
+    <a href="#api-advanced">Advanced API</a>
+    <a href="#snmp">SNMP</a>
+    <a href="#smtp">SMTP</a>
+    <a href="#data-transfer">Data Transfer</a>
+    <a href="#security">Security</a>
+    <a href="#labs">Labs</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero-banner">
+    <h1>Networking &amp; API Knowledge Base</h1>
+    <p>A comprehensive reference for APIs, network protocols, security, and data transfer. Built for learning &mdash; refer back anytime.</p>
+</div>
+
+<div class="container">
+
+<!-- ===================== SECTION 1: WHAT IS AN API ===================== -->
+<section id="api-basics">
+<h2>1. What is an API?</h2>
+<div class="card">
+<p><strong>API</strong> = Application Programming Interface. It&rsquo;s a set of rules that lets two software programs talk to each other. Think of it like a <strong>waiter in a restaurant</strong>:</p>
+<ul style="margin:1rem 0; padding-left:1.5rem;">
+    <li><strong>You</strong> (the client) look at the menu and tell the waiter what you want</li>
+    <li><strong>The waiter</strong> (the API) takes your order to the kitchen</li>
+    <li><strong>The kitchen</strong> (the server) prepares your food</li>
+    <li>The waiter brings back your food (the response)</li>
+</ul>
+<p>You never go into the kitchen directly &mdash; the waiter is the interface.</p>
+</div>
+
+<!-- SVG DIAGRAM: API Analogy -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" width="800" height="200">
+    <!-- Client -->
+    <rect x="10" y="50" width="140" height="100" rx="10" fill="#0f3460" stroke="#2563eb" stroke-width="2"/>
+    <text x="80" y="95" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">Client</text>
+    <text x="80" y="115" text-anchor="middle" fill="#93c5fd" font-size="11">(You)</text>
+    <!-- Arrow 1 -->
+    <line x1="150" y1="100" x2="280" y2="100" stroke="#2563eb" stroke-width="2" stroke-dasharray="8,4" class="animate-flow"/>
+    <polygon points="275,95 285,100 275,105" fill="#2563eb" class="animate-fade delay1"/>
+    <text x="215" y="88" text-anchor="middle" fill="#6b7280" font-size="10">HTTP Request</text>
+    <!-- API -->
+    <rect x="290" y="50" width="140" height="100" rx="10" fill="#1e3a5f" stroke="#2563eb" stroke-width="2"/>
+    <text x="360" y="95" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">API</text>
+    <text x="360" y="115" text-anchor="middle" fill="#93c5fd" font-size="11">(Waiter)</text>
+    <!-- Arrow 2 -->
+    <line x1="430" y1="100" x2="530" y2="100" stroke="#2563eb" stroke-width="2" stroke-dasharray="8,4" class="animate-flow delay2"/>
+    <polygon points="525,95 535,100 525,105" fill="#2563eb" class="animate-fade delay3"/>
+    <text x="480" y="88" text-anchor="middle" fill="#6b7280" font-size="10">Processes</text>
+    <!-- Server -->
+    <rect x="540" y="50" width="140" height="100" rx="10" fill="#0f3460" stroke="#16a34a" stroke-width="2"/>
+    <text x="610" y="95" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">Server</text>
+    <text x="610" y="115" text-anchor="middle" fill="#86efac" font-size="11">(Kitchen)</text>
+    <!-- DB -->
+    <rect x="700" y="70" width="90" height="60" rx="8" fill="#1e3a5f" stroke="#7c3aed" stroke-width="2"/>
+    <text x="745" y="105" text-anchor="middle" fill="#c4b5fd" font-size="11">Database</text>
+    <!-- Response arrow back -->
+    <line x1="540" y1="140" x2="290" y2="140" stroke="#16a34a" stroke-width="2" stroke-dasharray="8,4" class="animate-flow delay4"/>
+    <polygon points="295,135 285,140 295,145" fill="#16a34a" class="animate-fade delay5"/>
+    <text x="415" y="158" text-anchor="middle" fill="#16a34a" font-size="10">HTTP Response (JSON)</text>
+</svg>
+<p class="diagram-caption">Figure 1: API as a waiter between client and server</p>
+</div>
+
+<h3>Types of APIs</h3>
+<table>
+<tr><th>Type</th><th>How it Works</th><th>Best For</th><th>Example</th></tr>
+<tr><td><strong>REST</strong></td><td>Uses HTTP methods (GET, POST, PUT, DELETE) with URLs</td><td>Web apps, mobile apps</td><td>GitHub API, Twitter API</td></tr>
+<tr><td><strong>GraphQL</strong></td><td>Single endpoint, client specifies what data it wants</td><td>Complex data needs</td><td>Facebook, Shopify</td></tr>
+<tr><td><strong>SOAP</strong></td><td>XML-based, strict rules, enterprise-grade</td><td>Banking, enterprise</td><td>Payment gateways</td></tr>
+<tr><td><strong>WebSocket</strong></td><td>Two-way persistent connection</td><td>Chat, live data</td><td>Slack, Discord</td></tr>
+<tr><td><strong>RPC</strong></td><td>Remote Procedure Call &mdash; call functions on another machine</td><td>Microservices</td><td>gRPC, JSON-RPC</td></tr>
+</table>
+
+<h3>Key Concepts</h3>
+<div class="card">
+<h4>Endpoints</h4>
+<p>An endpoint is a specific URL where you send requests. Example:</p>
+<pre><code>GET  https://api.example.com/users/123
+POST https://api.example.com/users
+PUT  https://api.example.com/users/123
+DELETE https://api.example.com/users/123</code></pre>
+
+<h4>HTTP Methods</h4>
+<table>
+<tr><th>Method</th><th>Purpose</th><th>Example</th></tr>
+<tr><td><code>GET</code></td><td>Read/fetch data</td><td>Get all users</td></tr>
+<tr><td><code>POST</code></td><td>Create new data</td><td>Add a new user</td></tr>
+<tr><td><code>PUT</code></td><td>Update existing data</td><td>Update user #123</td></tr>
+<tr><td><code>PATCH</code></td><td>Partial update</td><td>Change just the email</td></tr>
+<tr><td><code>DELETE</code></td><td>Remove data</td><td>Delete user #123</td></tr>
+</table>
+
+<h4>Status Codes</h4>
+<table>
+<tr><th>Code</th><th>Meaning</th><th>What Happened</th></tr>
+<tr><td><code>200</code></td><td>OK</td><td>Request succeeded</td></tr>
+<tr><td><code>201</code></td><td>Created</td><td>New resource created</td></tr>
+<tr><td><code>301</code></td><td>Moved Permanently</td><td>Redirect to new URL</td></tr>
+<tr><td><code>400</code></td><td>Bad Request</td><td>Invalid input/data</td></tr>
+<tr><td><code>401</code></td><td>Unauthorized</td><td>Need to log in</td></tr>
+<tr><td><code>403</code></td><td>Forbidden</td><td>Logged in but no permission</td></tr>
+<tr><td><code>404</code></td><td>Not Found</td><td>Resource doesn&rsquo;t exist</td></tr>
+<tr><td><code>500</code></td><td>Server Error</td><td>Something broke on the server</td></tr>
+<tr><td><code>503</code></td><td>Service Unavailable</td><td>Server is overloaded or down</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ===================== SECTION 2: REQUEST/RESPONSE LIFECYCLE ===================== -->
+<section id="api-lifecycle">
+<h2>2. HTTP Request/Response Lifecycle</h2>
+<p>What actually happens when you type a URL or call an API?</p>
+
+<!-- SVG: Request Lifecycle -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 850 400" xmlns="http://www.w3.org/2000/svg" width="850" height="400">
+    <!-- Step boxes -->
+    <!-- 1. Client -->
+    <rect x="10" y="20" width="160" height="50" rx="8" fill="#0f3460" stroke="#2563eb" stroke-width="2"/>
+    <text x="90" y="50" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">1. Client Sends Request</text>
+    <!-- 2. DNS -->
+    <rect x="230" y="20" width="160" height="50" rx="8" fill="#1e3a5f" stroke="#7c3aed" stroke-width="2"/>
+    <text x="310" y="45" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">2. DNS Lookup</text>
+    <text x="310" y="60" text-anchor="middle" fill="#c4b5fd" font-size="9">example.com &rarr; 93.184.216.34</text>
+    <!-- 3. TCP -->
+    <rect x="450" y="20" width="160" height="50" rx="8" fill="#1e3a5f" stroke="#16a34a" stroke-width="2"/>
+    <text x="530" y="45" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">3. TCP Handshake</text>
+    <text x="530" y="60" text-anchor="middle" fill="#86efac" font-size="9">SYN &rarr; SYN-ACK &rarr; ACK</text>
+    <!-- 4. TLS -->
+    <rect x="10" y="110" width="160" height="50" rx="8" fill="#1e3a5f" stroke="#fbbf24" stroke-width="2"/>
+    <text x="90" y="135" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">4. TLS Handshake</text>
+    <text x="90" y="150" text-anchor="middle" fill="#fde68a" font-size="9">Encrypts the connection</text>
+    <!-- 5. Server Process -->
+    <rect x="230" y="110" width="160" height="50" rx="8" fill="#0f3460" stroke="#2563eb" stroke-width="2"/>
+    <text x="310" y="135" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">5. Server Processes</text>
+    <text x="310" y="150" text-anchor="middle" fill="#93c5fd" font-size="9">Route &rarr; Logic &rarr; DB query</text>
+    <!-- 6. Response -->
+    <rect x="450" y="110" width="160" height="50" rx="8" fill="#16a34a" stroke="#16a34a" stroke-width="2"/>
+    <text x="530" y="135" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">6. Server Sends Response</text>
+    <text x="530" y="150" text-anchor="middle" fill="#dcfce7" font-size="9">HTTP 200 + JSON body</text>
+    <!-- 7. Client Render -->
+    <rect x="230" y="200" width="160" height="50" rx="8" fill="#0f3460" stroke="#2563eb" stroke-width="2"/>
+    <text x="310" y="225" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">7. Client Renders</text>
+    <text x="310" y="240" text-anchor="middle" fill="#93c5fd" font-size="9">Displays data to user</text>
+
+    <!-- Arrows -->
+    <line x1="170" y1="45" x2="230" y2="45" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
+    <line x1="390" y1="45" x2="450" y2="45" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrowPurple)"/>
+    <path d="M 530 70 L 530 95 L 90 95 L 90 110" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#arrowYellow)"/>
+    <line x1="170" y1="135" x2="230" y2="135" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
+    <line x1="390" y1="135" x2="450" y2="135" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowGreen)"/>
+    <path d="M 530 160 L 530 180 L 310 180 L 310 200" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+    <!-- Arrow markers -->
+    <defs>
+        <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/></marker>
+        <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a"/></marker>
+        <marker id="arrowPurple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#7c3aed"/></marker>
+        <marker id="arrowYellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fbbf24"/></marker>
+    </defs>
+
+    <!-- Legend -->
+    <rect x="650" y="20" width="180" height="110" rx="6" fill="#f8fafc" stroke="#e2e4e9"/>
+    <text x="660" y="42" fill="#1a1d21" font-size="11" font-weight="bold">Legend</text>
+    <line x1="660" y1="60" x2="690" y2="60" stroke="#2563eb" stroke-width="2"/><text x="695" y="64" fill="#6b7280" font-size="9">Request flow</text>
+    <line x1="660" y1="80" x2="690" y2="80" stroke="#16a34a" stroke-width="2"/><text x="695" y="84" fill="#6b7280" font-size="9">Response flow</text>
+    <line x1="660" y1="100" x2="690" y2="100" stroke="#7c3aed" stroke-width="2"/><text x="695" y="104" fill="#6b7280" font-size="9">DNS resolution</text>
+</svg>
+<p class="diagram-caption">Figure 2: Complete HTTP request/response lifecycle</p>
+</div>
+
+<div class="card highlight">
+<h4>Quick Reference: What happens in milliseconds</h4>
+<table>
+<tr><th>Step</th><th>Typical Time</th><th>What Happens</th></tr>
+<tr><td>DNS Lookup</td><td>1&ndash;50ms</td><td>Domain name resolved to IP address</td></tr>
+<tr><td>TCP Handshake</td><td>1&ndash;10ms</td><td>Three-way handshake (SYN, SYN-ACK, ACK)</td></tr>
+<tr><td>TLS Handshake</td><td>10&ndash;100ms</td><td>SSL certificate exchange, key agreement</td></tr>
+<tr><td>Server Processing</td><td>10&ndash;5000ms</td><td>Depends on database queries, logic complexity</td></tr>
+<tr><td>Data Transfer</td><td>1&ndash;100ms</td><td>Response body sent back (depends on size)</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ===================== SECTION 3: BUILD A SIMPLE API ===================== -->
+<section id="api-simple">
+<h2>3. Building a Simple REST API (PHP)</h2>
+
+<div class="card success">
+<h4>Goal: A complete CRUD API for managing contacts</h4>
+<p>This example uses plain PHP with no frameworks. It handles GET, POST, PUT, DELETE with JSON.</p>
+</div>
+
+<h3>Step 1: Create the endpoint file</h3>
+<p>Save this as <code>api.php</code> and put it in your web root:</p>
+<pre><code><span class="cmt">&lt;?php</span>
+<span class="cmt">// api.php - Simple REST API for contacts</span>
+<span class="cmt">// No framework needed!</span>
+
+<span class="cmt">// Set JSON response header</span>
+header(<span class="str">'Content-Type: application/json'</span>);
+
+<span class="cmt">// --- DATABASE CONNECTION ---</span>
+<span class="fn">function</span> db() {
+    <span class="kw">static</span> $pdo = <span class="kw">null</span>;
+    <span class="kw">if</span> ($pdo === <span class="kw">null</span>) {
+        $pdo = <span class="kw">new</span> PDO(
+            <span class="str">'mysql:host=localhost;dbname=myapp;charset=utf8mb4'</span>,
+            <span class="str">'root'</span>, <span class="str">''</span>,
+            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+        );
+    }
+    <span class="kw">return</span> $pdo;
+}
+
+<span class="cmt">// --- PARSE THE REQUEST ---</span>
+$method = $_SERVER[<span class="str">'REQUEST_METHOD'</span>];
+$path   = parse_url($_SERVER[<span class="str">'REQUEST_URI'</span>], PHP_URL_PATH);
+$segments = array_filter(explode(<span class="str">'/'</span>, $path));
+$segments = array_values($segments);
+
+<span class="cmt">// Extract ID if present: /api.php/contacts/5</span>
+$id = $segments[<span class="num">1</span>] ?? <span class="kw">null</span>;
+
+<span class="cmt">// Read JSON body if present</span>
+$input = json_decode(file_get_contents(<span class="str">'php://input'</span>), <span class="kw">true</span>);
+
+<span class="cmt">// --- ROUTE THE REQUEST ---</span>
+<span class="kw">try</span> {
+    <span class="kw">if</span> ($method === <span class="str">'GET'</span> && !$id) {
+        <span class="cmt">// GET all contacts</span>
+        $rows = db()->query(<span class="str">"SELECT * FROM contacts ORDER BY id"</span>)->fetchAll();
+        echo json_encode([<span class="str">'success'</span> => <span class="kw">true</span>, <span class="str">'data'</span> => $rows]);
+
+    } <span class="kw">elseif</span> ($method === <span class="str">'GET'</span> && $id) {
+        <span class="cmt">// GET one contact</span>
+        $stmt = db()->prepare(<span class="str">"SELECT * FROM contacts WHERE id = ?"</span>);
+        $stmt->execute([$id]);
+        $row = $stmt->fetch();
+        <span class="kw">if</span> ($row) {
+            echo json_encode([<span class="str">'success'</span> => <span class="kw">true</span>, <span class="str">'data'</span> => $row]);
+        } <span class="kw">else</span> {
+            http_response_code(<span class="num">404</span>);
+            echo json_encode([<span class="str">'success'</span> => <span class="kw">false</span>, <span class="str">'error'</span> => <span class="str">'Not found'</span>]);
+        }
+
+    } <span class="kw">elseif</span> ($method === <span class="str">'POST'</span>) {
+        <span class="cmt">// CREATE a new contact</span>
+        $stmt = db()->prepare(
+            <span class="str">"INSERT INTO contacts (name, email, phone) VALUES (?, ?, ?)"</span>
+        );
+        $stmt->execute([
+            $input[<span class="str">'name'</span>],
+            $input[<span class="str">'email'</span>],
+            $input[<span class="str">'phone'</span>] ?? <span class="kw">null</span>
+        ]);
+        $newId = db()->lastInsertId();
+        http_response_code(<span class="num">201</span>);
+        echo json_encode([<span class="str">'success'</span> => <span class="kw">true</span>, <span class="str">'id'</span> => $newId]);
+
+    } <span class="kw">elseif</span> ($method === <span class="str">'PUT'</span> && $id) {
+        <span class="cmt">// UPDATE a contact</span>
+        $stmt = db()->prepare(
+            <span class="str">"UPDATE contacts SET name=?, email=?, phone=? WHERE id=?"</span>
+        );
+        $stmt->execute([
+            $input[<span class="str">'name'</span>],
+            $input[<span class="str">'email'</span>],
+            $input[<span class="str">'phone'</span>] ?? <span class="kw">null</span>,
+            $id
+        ]);
+        echo json_encode([<span class="str">'success'</span> => <span class="kw">true</span>]);
+
+    } <span class="kw">elseif</span> ($method === <span class="str">'DELETE'</span> && $id) {
+        <span class="cmt">// DELETE a contact</span>
+        $stmt = db()->prepare(<span class="str">"DELETE FROM contacts WHERE id = ?"</span>);
+        $stmt->execute([$id]);
+        echo json_encode([<span class="str">'success'</span> => <span class="kw">true</span>]);
+
+    } <span class="kw">else</span> {
+        http_response_code(<span class="num">400</span>);
+        echo json_encode([<span class="str">'success'</span> => <span class="kw">false</span>, <span class="str">'error'</span> => <span class="str">'Invalid request'</span>]);
+    }
+} <span class="kw">catch</span> (Exception $e) {
+    http_response_code(<span class="num">500</span>);
+    echo json_encode([<span class="str">'success'</span> => <span class="kw">false</span>, <span class="str">'error'</span> => $e->getMessage()]);
+}</code></pre>
+
+<h3>Step 2: Create the database table</h3>
+<pre><code><span class="kw">CREATE DATABASE</span> myapp;
+<span class="kw">USE</span> myapp;
+
+<span class="kw">CREATE TABLE</span> contacts (
+    id <span class="fn">INT AUTO_INCREMENT PRIMARY KEY</span>,
+    name <span class="fn">VARCHAR</span>(<span class="num">100</span>) <span class="kw">NOT NULL</span>,
+    email <span class="fn">VARCHAR</span>(<span class="num">200</span>) <span class="kw">NOT NULL</span>,
+    phone <span class="fn">VARCHAR</span>(<span class="num">50</span>),
+    created_at <span class="fn">TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span>
+);</code></pre>
+
+<h3>Step 3: Test it with curl</h3>
+<pre><code><span class="cmt"># CREATE - Add a new contact</span>
+curl -X POST http://localhost/api.php \
+  -H <span class="str">"Content-Type: application/json"</span> \
+  -d <span class="str">'{"name":"John","email":"john@example.com","phone":"555-1234"}'</span>
+
+<span class="cmt"># READ - Get all contacts</span>
+curl http://localhost/api.php
+
+<span class="cmt"># READ - Get one contact</span>
+curl http://localhost/api.php/1
+
+<span class="cmt"># UPDATE - Change a contact</span>
+curl -X PUT http://localhost/api.php/1 \
+  -H <span class="str">"Content-Type: application/json"</span> \
+  -d <span class="str">'{"name":"John Updated","email":"john@new.com"}'</span>
+
+<span class="cmt"># DELETE - Remove a contact</span>
+curl -X DELETE http://localhost/api.php/1</code></pre>
+</section>
+
+<!-- ===================== SECTION 4: ADVANCED API ===================== -->
+<section id="api-advanced">
+<h2>4. Building an Advanced API</h2>
+
+<h3>Authentication: API Keys</h3>
+<div class="card">
+<p>The simplest auth method. Client sends a key in headers:</p>
+<pre><code><span class="cmt">&lt;?php</span>
+<span class="cmt">// Check API key at the top of your API file</span>
+$apiKey = $_SERVER[<span class="str">'HTTP_X_API_KEY'</span>] ?? <span class="str">''</span>;
+
+<span class="kw">if</span> ($apiKey !== <span class="str">'your-secret-key-here'</span>) {
+    http_response_code(<span class="num">401</span>);
+    echo json_encode([<span class="str">'error'</span> => <span class="str">'Invalid API key'</span>]);
+    exit;
+}</code></pre>
+<p><strong>Client sends:</strong> <code>curl -H "X-API-Key: your-secret-key-here" http://localhost/api.php</code></p>
+</div>
+
+<h3>Authentication: JWT Tokens</h3>
+<div class="card">
+<p><strong>JWT</strong> = JSON Web Token. A signed token that contains user info. Three parts separated by dots:</p>
+</div>
+
+<!-- SVG: JWT Structure -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 800 150" xmlns="http://www.w3.org/2000/svg" width="800" height="150">
+    <text x="400" y="20" text-anchor="middle" fill="#1a1d21" font-size="13" font-weight="bold">JWT Token Structure</text>
+    <!-- Header -->
+    <rect x="20" y="45" width="220" height="70" rx="8" fill="#0f3460" stroke="#2563eb" stroke-width="2"/>
+    <text x="130" y="70" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">Header</text>
+    <text x="130" y="90" text-anchor="middle" fill="#93c5fd" font-size="9">{"alg":"HS256",</text>
+    <text x="130" y="105" text-anchor="middle" fill="#93c5fd" font-size="9">"typ":"JWT"}</text>
+    <!-- Dot -->
+    <circle cx="255" cy="80" r="6" fill="#e2e4e9"/>
+    <!-- Payload -->
+    <rect x="275" y="45" width="230" height="70" rx="8" fill="#1e3a5f" stroke="#16a34a" stroke-width="2"/>
+    <text x="390" y="70" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">Payload</text>
+    <text x="390" y="90" text-anchor="middle" fill="#86efac" font-size="9">{"user_id":123,</text>
+    <text x="390" y="105" text-anchor="middle" fill="#86efac" font-size="9">"role":"admin","exp":...}</text>
+    <!-- Dot -->
+    <circle cx="520" cy="80" r="6" fill="#e2e4e9"/>
+    <!-- Signature -->
+    <rect x="540" y="45" width="230" height="70" rx="8" fill="#7c3aed" stroke="#7c3aed" stroke-width="2"/>
+    <text x="655" y="70" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">Signature</text>
+    <text x="655" y="90" text-anchor="middle" fill="#ddd6fe" font-size="9">HMAC-SHA256(</text>
+    <text x="655" y="105" text-anchor="middle" fill="#ddd6fe" font-size="9">base64(header)+"."+base64(payload),</text>
+    <text x="655" y="118" text-anchor="middle" fill="#ddd6fe" font-size="9">secret_key)</text>
+</svg>
+<p class="diagram-caption">Figure 3: JWT token = Header + Payload + Signature</p>
+</div>
+
+<pre><code><span class="cmt">&lt;?php</span>
+<span class="cmt">// --- JWT Helper Functions ---</span>
+
+<span class="kw">function</span> <span class="fn">jwt_encode</span>($payload, $secret, $expiry = <span class="num">3600</span>) {
+    $header = json_encode([<span class="str">'alg'</span> => <span class="str">'HS256'</span>, <span class="str">'typ'</span> => <span class="str">'JWT'</span>]);
+    $payload[<span class="str">'exp'</span>] = time() + $expiry;
+    $payload = json_encode($payload);
+
+    $base64Header = rtrim(strtr(base64_encode($header), <span class="str">'+/'</span>, <span class="str">'-_'</span>), <span class="str">'='</span>);
+    $base64Payload = rtrim(strtr(base64_encode($payload), <span class="str">'+/'</span>, <span class="str">'-_'</span>), <span class="str">'='</span>);
+    $signature = hash_hmac(<span class="str">'sha256'</span>, <span class="str">"$base64Header.$base64Payload"</span>, $secret, <span class="kw">true</span>);
+    $base64Sig = rtrim(strtr(base64_encode($signature), <span class="str">'+/'</span>, <span class="str">'-_'</span>), <span class="str">'='</span>);
+
+    <span class="kw">return</span> <span class="str">"$base64Header.$base64Payload.$base64Sig"</span>;
+}
+
+<span class="kw">function</span> <span class="fn">jwt_decode</span>($token, $secret) {
+    [$header, $payload, $sig] = explode(<span class="str">'.'</span>, $token);
+    <span class="cmt">// Verify signature</span>
+    $expected = hash_hmac(<span class="str">'sha256'</span>, <span class="str">"$header.$payload"</span>, $secret, <span class="kw">true</span>);
+    $expected64 = rtrim(strtr(base64_encode($expected), <span class="str">'+/'</span>, <span class="str">'-_'</span>), <span class="str">'='</span>);
+    <span class="kw">if</span> ($sig !== $expected64) <span class="kw">return false</span>;
+
+    $data = json_decode(base64_decode($payload), <span class="kw">true</span>);
+    <span class="kw">if</span> ($data[<span class="str">'exp'</span>] < time()) <span class="kw">return false</span>; <span class="cmt">// expired</span>
+    <span class="kw">return</span> $data;
+}
+
+<span class="cmt">// --- Usage ---</span>
+<span class="cmt">// Login endpoint: verify user, then issue token</span>
+$token = jwt_encode([<span class="str">'user_id'</span> => <span class="num">123</span>, <span class="str">'role'</span> => <span class="str">'admin'</span>], <span class="str">'your-secret'</span>);
+<span class="cmt">// Client stores token, sends: Authorization: Bearer &lt;token&gt;</span></code></pre>
+
+<h3>Rate Limiting</h3>
+<div class="card">
+<p>Prevent abuse by limiting requests per user/IP:</p>
+<pre><code><span class="cmt">&lt;?php</span>
+<span class="cmt">// Simple rate limiter using file-based storage</span>
+<span class="kw">function</span> <span class="fn">rate_limit</span>($key, $maxRequests = <span class="num">60</span>, $windowSeconds = <span class="num">60</span>) {
+    $file = <span class="str">"/tmp/rate_"</span> . md5($key);
+    $now = time();
+
+    <span class="kw">if</span> (file_exists($file)) {
+        $data = json_decode(file_get_contents($file), <span class="kw">true</span>);
+        <span class="cmt">// Remove old entries outside the window</span>
+        $data = array_filter($data, <span class="kw">fn</span>($t) => $t > $now - $windowSeconds);
+    } <span class="kw">else</span> {
+        $data = [];
+    }
+
+    <span class="kw">if</span> (count($data) >= $maxRequests) {
+        http_response_code(<span class="num">429</span>);
+        header(<span class="str">'Retry-After: '</span> . $windowSeconds);
+        echo json_encode([<span class="str">'error'</span> => <span class="str">'Rate limit exceeded'</span>]);
+        exit;
+    }
+
+    $data[] = $now;
+    file_put_contents($file, json_encode($data));
+}</code></pre>
+</div>
+
+<h3>Pagination</h3>
+<div class="card">
+<p>Don&rsquo;t return all records at once. Use <code>page</code> and <code>limit</code>:</p>
+<pre><code><span class="cmt">&lt;?php</span>
+$page  = max(<span class="num">1</span>, (int)($_GET[<span class="str">'page'</span>] ?? <span class="num">1</span>));
+$limit = min(<span class="num">100</span>, max(<span class="num">1</span>, (int)($_GET[<span class="str">'limit'</span>] ?? <span class="num">20</span>)));
+$offset = ($page - <span class="num">1</span>) * $limit;
+
+<span class="cmt">// Get total count</span>
+$total = db()->query(<span class="str">"SELECT COUNT(*) FROM contacts"</span>)->fetchColumn();
+
+<span class="cmt">// Get page of data</span>
+$stmt = db()->prepare(<span class="str">"SELECT * FROM contacts LIMIT ? OFFSET ?"</span>);
+$stmt->execute([$limit, $offset]);
+
+echo json_encode([
+    <span class="str">'data'</span>       => $stmt->fetchAll(),
+    <span class="str">'page'</span>       => $page,
+    <span class="str">'limit'</span>      => $limit,
+    <span class="str">'total'</span>      => $total,
+    <span class="str">'total_pages'</span> => ceil($total / $limit),
+]);</code></pre>
+</div>
+
+<h3>Input Validation</h3>
+<div class="card">
+<pre><code><span class="cmt">&lt;?php</span>
+<span class="kw">function</span> <span class="fn">validate</span>($input, $rules) {
+    $errors = [];
+    <span class="kw">foreach</span> ($rules <span class="kw">as</span> $field => $rule) {
+        <span class="kw">if</span> ($rule[<span class="str">'required'</span>] && empty($input[$field])) {
+            $errors[$field] = <span class="str">"$field is required"</span>;
+            <span class="kw">continue</span>;
+        }
+        <span class="kw">if</span> (isset($input[$field])) {
+            <span class="kw">if</span> (isset($rule[<span class="str">'max'</span>]) && strlen($input[$field]) > $rule[<span class="str">'max'</span>]) {
+                $errors[$field] = <span class="str">"$field must be under {$rule['max']} chars"</span>;
+            }
+            <span class="kw">if</span> ($rule[<span class="str">'type'</span>] === <span class="str">'email'</span> && !filter_var($input[$field], FILTER_VALIDATE_EMAIL)) {
+                $errors[$field] = <span class="str">"$field must be a valid email"</span>;
+            }
+        }
+    }
+    <span class="kw">return</span> empty($errors) ? <span class="kw">true</span> : $errors;
+}
+
+<span class="cmt">// Usage</span>
+$result = validate($input, [
+    <span class="str">'name'</span>  => [<span class="str">'required'</span> => <span class="kw">true</span>, <span class="str">'max'</span> => <span class="num">100</span>],
+    <span class="str">'email'</span> => [<span class="str">'required'</span> => <span class="kw">true</span>, <span class="str">'type'</span> => <span class="str">'email'</span>],
+]);
+<span class="kw">if</span> ($result !== <span class="kw">true</span>) {
+    http_response_code(<span class="num">400</span>);
+    echo json_encode([<span class="str">'errors'</span> => $result]);
+    exit;
+}</code></pre>
+</div>
+</section>
+
+<!-- ===================== SECTION 5: SNMP ===================== -->
+<section id="snmp">
+<h2>5. SNMP &mdash; Simple Network Management Protocol</h2>
+
+<div class="card highlight">
+<p><strong>SNMP</strong> is used to <strong>monitor and manage</strong> network devices like routers, switches, printers, and servers. It lets a central system (NMS) query devices for stats like CPU usage, bandwidth, uptime, and temperature.</p>
+</div>
+
+<!-- SVG: SNMP Architecture -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg" width="800" height="280">
+    <text x="400" y="20" text-anchor="middle" fill="#1a1d21" font-size="14" font-weight="bold">SNMP Architecture</text>
+    <!-- NMS -->
+    <rect x="30" y="40" width="180" height="90" rx="10" fill="#0f3460" stroke="#2563eb" stroke-width="2"/>
+    <text x="120" y="68" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">NMS</text>
+    <text x="120" y="88" text-anchor="middle" fill="#93c5fd" font-size="10">Network Management</text>
+    <text x="120" y="103" text-anchor="middle" fill="#93c5fd" font-size="10">Station (Manager)</text>
+    <text x="120" y="118" text-anchor="middle" fill="#60a5fa" font-size="9">e.g. Zabbix, LibreNMS</text>
+    <!-- Agent 1 -->
+    <rect x="310" y="40" width="170" height="90" rx="10" fill="#1e3a5f" stroke="#16a34a" stroke-width="2"/>
+    <text x="395" y="68" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">SNMP Agent</text>
+    <text x="395" y="88" text-anchor="middle" fill="#86efac" font-size="10">Server / Router</text>
+    <text x="395" y="103" text-anchor="middle" fill="#86efac" font-size="10">Runs SNMP daemon</text>
+    <text x="395" y="118" text-anchor="middle" fill="#4ade80" font-size="9">Port 161 (UDP)</text>
+    <!-- Agent 2 -->
+    <rect x="540" y="40" width="170" height="90" rx="10" fill="#1e3a5f" stroke="#16a34a" stroke-width="2"/>
+    <text x="625" y="68" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">SNMP Agent</text>
+    <text x="625" y="88" text-anchor="middle" fill="#86efac" font-size="10">Printer / Switch</text>
+    <text x="625" y="103" text-anchor="middle" fill="#86efac" font-size="10">Runs SNMP daemon</text>
+    <text x="625" y="118" text-anchor="middle" fill="#4ade80" font-size="9">Port 161 (UDP)</text>
+    <!-- MIB Tree -->
+    <rect x="30" y="165" width="680" height="100" rx="10" fill="#f8fafc" stroke="#e2e4e9" stroke-width="1"/>
+    <text x="370" y="185" text-anchor="middle" fill="#1a1d21" font-size="12" font-weight="bold">MIB (Management Information Base) &mdash; OID Tree</text>
+    <text x="50" y="210" fill="#6b7280" font-size="10">1.3.6.1.2.1</text>
+    <text x="180" y="210" fill="#0f3460" font-size="10" font-weight="bold">= iso.org.dod.internet.mgmt.mib-2</text>
+    <text x="50" y="230" fill="#6b7280" font-size="10">1.3.6.1.2.1.1.1</text>
+    <text x="200" y="230" fill="#16a34a" font-size="10">= sysDescr (device description)</text>
+    <text x="50" y="248" fill="#6b7280" font-size="10">1.3.6.1.2.1.1.3</text>
+    <text x="200" y="248" fill="#7c3aed" font-size="10">= sysUpTime (how long device has been running)</text>
+    <!-- Arrows -->
+    <line x1="210" y1="75" x2="310" y2="75" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
+    <text x="260" y="68" text-anchor="middle" fill="#6b7280" font-size="9">GET / SET</text>
+    <line x1="210" y1="95" x2="540" y2="95" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
+    <text x="375" y="135" text-anchor="middle" fill="#ea580c" font-size="9">SNMP TRAP (async alerts: device goes down, high CPU, etc.)</text>
+    <path d="M 395 130 L 395 155 L 120 155 L 120 130" fill="none" stroke="#ea580c" stroke-width="2" marker-end="url(#arrowYellow)"/>
+</svg>
+<p class="diagram-caption">Figure 4: SNMP manager queries agents; agents send traps for alerts</p>
+</div>
+
+<div class="card">
+<h3>SNMP Versions Comparison</h3>
+<table>
+<tr><th>Feature</th><th>v1</th><th>v2c</th><th>v3</th></tr>
+<tr><td>Authentication</td><td>Community string (plaintext)</td><td>Community string (plaintext)</td><td>Username + password</td></tr>
+<tr><td>Encryption</td><td>None</td><td>None</td><td>AES/DES</td></tr>
+<tr><td>Security</td><td>Weak</td><td>Weak</td><td>Strong</td></tr>
+<tr><td>Performance</td><td>Slow</td><td>Faster (bulk gets)</td><td>Fast + Secure</td></tr>
+<tr><td>Use Case</td><td>Legacy devices</td><td>Internal networks</td><td>Production/Internet</td></tr>
+</table>
+
+<h3>Practical Commands</h3>
+<pre><code><span class="cmt"># Install SNMP tools (Linux)</span>
+sudo apt install snmp snmp-mibs-downloader
+
+<span class="cmt"># GET - Query a single value</span>
+snmpget -v2c -c public 192.168.1.1 1.3.6.1.2.1.1.1.0
+<span class="cmt"># Returns: system description (e.g. "Linux server 5.15.0...")</span>
+
+<span class="cmt"># WALK - Get all values in a subtree</span>
+snmpwalk -v2c -c public 192.168.1.1 1.3.6.1.2.1.1
+<span class="cmt"># Returns: sysDescr, sysObjectID, sysUpTime, sysContact, sysName...</span>
+
+<span class="cmt"># GETNEXT - Get next OID in the tree</span>
+snmpgetnext -v2c -c public 192.168.1.1 1.3.6.1.2.1.1.1
+
+<span class="cmt"># SET - Write a value (requires write access)</span>
+snmpset -v2c -c private 192.168.1.1 1.3.6.1.2.1.1.5.0 s "newhostname"
+
+<span class="cmt"># SNMP v3 (secure)</span>
+snmpget -v3 -l authPriv -u admin -A SHA -a authpass -x AES -X privpass 192.168.1.1 1.3.6.1.2.1.1.1.0</code></pre>
+
+<h3>Common OIDs</h3>
+<table>
+<tr><th>OID</th><th>Name</th><th>Description</th></tr>
+<tr><td><code>1.3.6.1.2.1.1.1.0</code></td><td>sysDescr</td><td>Device description / OS version</td></tr>
+<tr><td><code>1.3.6.1.2.1.1.3.0</code></td><td>sysUpTime</td><td>Time since last reboot</td></tr>
+<tr><td><code>1.3.6.1.2.1.1.5.0</code></td><td>sysName</td><td>Device hostname</td></tr>
+<tr><td><code>1.3.6.1.4.1.2021.11.9.0</code></td><td>ssCpuIdle</td><td>CPU idle percentage (Linux)</td></tr>
+<tr><td><code>1.3.6.1.4.1.2021.4.6.0</code></td><td>memAvailReal</td><td>Available RAM (Linux)</td></tr>
+<tr><td><code>1.3.6.1.2.1.2.2.1.10</code></td><td>ifInOctets</td><td>Bytes received on interface</td></tr>
+<tr><td><code>1.3.6.1.2.1.2.2.1.16</code></td><td>ifOutOctets</td><td>Bytes transmitted on interface</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ===================== SECTION 6: SMTP ===================== -->
+<section id="smtp">
+<h2>6. SMTP &amp; Email Protocols</h2>
+
+<div class="card highlight">
+<p><strong>SMTP</strong> = Simple Mail Transfer Protocol. It&rsquo;s how email is <strong>sent</strong> across the internet. For <strong>reading</strong> email, you use IMAP or POP3.</p>
+</div>
+
+<!-- SVG: Email Flow -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 850 200" xmlns="http://www.w3.org/2000/svg" width="850" height="200">
+    <text x="425" y="18" text-anchor="middle" fill="#1a1d21" font-size="14" font-weight="bold">How Email Travels</text>
+    <!-- User -->
+    <rect x="10" y="40" width="120" height="60" rx="8" fill="#0f3460" stroke="#2563eb" stroke-width="2"/>
+    <text x="70" y="65" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">You</text>
+    <text x="70" y="82" text-anchor="middle" fill="#93c5fd" font-size="9">(Gmail/Outlook)</text>
+    <!-- SMTP 1 -->
+    <line x1="130" y1="70" x2="200" y2="70" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
+    <text x="165" y="60" text-anchor="middle" fill="#6b7280" font-size="8">SMTP:587</text>
+    <!-- Your SMTP -->
+    <rect x="205" y="40" width="130" height="60" rx="8" fill="#1e3a5f" stroke="#2563eb" stroke-width="2"/>
+    <text x="270" y="65" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">Your SMTP</text>
+    <text x="270" y="82" text-anchor="middle" fill="#93c5fd" font-size="9">smtp.gmail.com</text>
+    <!-- DNS MX -->
+    <rect x="385" y="40" width="120" height="60" rx="8" fill="#f8fafc" stroke="#7c3aed" stroke-width="2"/>
+    <text x="445" y="62" text-anchor="middle" fill="#7c3aed" font-size="11" font-weight="bold">DNS</text>
+    <text x="445" y="78" text-anchor="middle" fill="#7c3aed" font-size="9">MX Lookup</text>
+    <text x="445" y="92" text-anchor="middle" fill="#6b7280" font-size="8">"Where is example.com?"</text>
+    <!-- Arrows -->
+    <line x1="335" y1="70" x2="385" y2="70" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowPurple)"/>
+    <!-- Recipient SMTP -->
+    <rect x="545" y="40" width="140" height="60" rx="8" fill="#1e3a5f" stroke="#16a34a" stroke-width="2"/>
+    <text x="615" y="65" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">Recipient SMTP</text>
+    <text x="615" y="82" text-anchor="middle" fill="#86efac" font-size="9">mail.example.com</text>
+    <line x1="445" y1="85" x2="545" y2="70" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowGreen)"/>
+    <text x="495" y="88" text-anchor="middle" fill="#6b7280" font-size="8">SMTP:25</text>
+    <!-- Mailbox -->
+    <rect x="720" y="40" width="120" height="60" rx="8" fill="#0f3460" stroke="#16a34a" stroke-width="2"/>
+    <text x="780" y="65" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">Mailbox</text>
+    <text x="780" y="82" text-anchor="middle" fill="#86efac" font-size="9">user@example.com</text>
+    <line x1="685" y1="70" x2="720" y2="70" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+    <!-- Bottom: IMAP/POP3 -->
+    <rect x="720" y="130" width="120" height="45" rx="8" fill="#1e3a5f" stroke="#ea580c" stroke-width="2"/>
+    <text x="780" y="150" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">Recipient</text>
+    <text x="780" y="164" text-anchor="middle" fill="#fbbf24" font-size="9">IMAP:143 / POP3:110</text>
+    <line x1="780" y1="130" x2="780" y2="100" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="800" y="120" fill="#ea580c" font-size="8">reads mail</text>
+</svg>
+<p class="diagram-caption">Figure 5: Email travels via SMTP; recipient reads via IMAP/POP3</p>
+</div>
+
+<div class="card">
+<h3>Email Protocols Comparison</h3>
+<table>
+<tr><th>Protocol</th><th>Purpose</th><th>Port</th><th>Encryption</th></tr>
+<tr><td><strong>SMTP</strong></td><td>Sending email</td><td>25 / 587 / 465</td><td>STARTTLS (587) or SSL (465)</td></tr>
+<tr><td><strong>IMAP</strong></td><td>Reading email (synced)</td><td>143 / 993</td><td>SSL (993)</td></tr>
+<tr><td><strong>POP3</strong></td><td>Reading email (download)</td><td>110 / 995</td><td>SSL (995)</td></tr>
+</table>
+
+<h3>Test SMTP Manually with Telnet</h3>
+<pre><code><span class="cmt"># Connect to SMTP server</span>
+telnet smtp.gmail.com 587
+
+<span class="cmt"># EHLO - introduce yourself</span>
+EHLO mycomputer
+
+<span class="cmt"># STARTTLS - begin encryption</span>
+STARTTLS
+
+<span class="cmt"># AUTH LOGIN - authenticate</span>
+AUTH LOGIN
+<span class="cmt"># (base64 encoded username)</span>
+<span class="cmt"># (base64 encoded password)</span>
+
+<span class="cmt"># Set sender and recipient</span>
+MAIL FROM:&lt;me@example.com&gt;
+RCPT TO:&lt;friend@example.com&gt;
+DATA
+
+<span class="cmt"># Write the email</span>
+Subject: Test Email
+From: me@example.com
+To: friend@example.com
+
+Hello! This is a test email sent via SMTP.
+
+.
+QUIT</code></pre>
+
+<h3>Send Email with PHP</h3>
+<pre><code><span class="cmt">&lt;?php</span>
+<span class="cmt">// Simple PHP mail()</span>
+mail(<span class="str">'recipient@example.com'</span>, <span class="str">'Subject'</span>, <span class="str">'Body text here'</span>);
+
+<span class="cmt">// Better: PHPMailer library</span>
+<span class="kw">use</span> PHPMailer\PHPMailer\PHPMailer;
+
+$mail = <span class="kw">new</span> PHPMailer(<span class="kw">true</span>);
+$mail->isSMTP();
+$mail->Host       = <span class="str">'smtp.gmail.com'</span>;
+$mail->SMTPAuth   = <span class="kw">true</span>;
+$mail->Username   = <span class="str">'you@gmail.com'</span>;
+$mail->Password   = <span class="str">'app-specific-password'</span>;
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+$mail->Port       = <span class="num">587</span>;
+
+$mail->setFrom(<span class="str">'you@gmail.com'</span>, <span class="str">'Your Name'</span>);
+$mail->addAddress(<span class="str">'friend@example.com'</span>);
+$mail->Subject = <span class="str">'Test from PHPMailer'</span>;
+$mail->Body    = <span class="str">'&lt;h1&gt;Hello!&lt;/h1&gt;&lt;p&gt;Sent via PHPMailer&lt;/p&gt;'</span>;
+$mail->isHTML(<span class="kw">true</span>);
+$mail->send();</code></pre>
+
+<h3>Email Security: SPF, DKIM, DMARC</h3>
+<div class="card warning">
+<table>
+<tr><th>Record</th><th>Purpose</th><th>DNS Record Example</th></tr>
+<tr><td><strong>SPF</strong></td><td>Which servers can send email for your domain</td><td><code>v=spf1 include:_spf.google.com ~all</code></td></tr>
+<tr><td><strong>DKIM</strong></td><td>Cryptographic signature to prove email is real</td><td><code>v=DKIM1; k=rsa; p=MIGf...</code></td></tr>
+<tr><td><strong>DMARC</strong></td><td>What to do with failing emails (reject/quarantine)</td><td><code>v=DMARC1; p=reject; rua=mailto:you@...</code></td></tr>
+</table>
+</div>
+</section>
+
+<!-- ===================== SECTION 7: DATA TRANSFER ===================== -->
+<section id="data-transfer">
+<h2>7. Data Transfer Protocols</h2>
+
+<div class="card">
+<table>
+<tr><th>Protocol</th><th>Port</th><th>Encryption</th><th>Speed</th><th>Best For</th></tr>
+<tr><td><strong>FTP</strong></td><td>21</td><td>None (plaintext!)</td><td>Fast</td><td>Legacy file transfers</td></tr>
+<tr><td><strong>FTPS</strong></td><td>990</td><td>SSL/TLS</td><td>Fast</td><td>FTP with encryption</td></tr>
+<tr><td><strong>SFTP</strong></td><td>22</td><td>SSH (full encryption)</td><td>Medium</td><td>Secure file transfer</td></tr>
+<tr><td><strong>SCP</strong></td><td>22</td><td>SSH</td><td>Fast</td><td>Quick single-file copy</td></tr>
+<tr><td><strong>rsync</strong></td><td>22 (SSH) / 873</td><td>Optional (SSH)</td><td>Fastest (delta)</td><td>Incremental sync/backups</td></tr>
+<tr><td><strong>HTTP/HTTPS</strong></td><td>80 / 443</td><td>TLS (HTTPS)</td><td>Medium</td><td>Web downloads</td></tr>
+<tr><td><strong>NFS</strong></td><td>2049</td><td>None (Kerberos optional)</td><td>Fast (LAN)</td><td>Network file sharing</td></tr>
+<tr><td><strong>SMB</strong></td><td>445</td><td>Optional</td><td>Fast (LAN)</td><td>Windows file sharing</td></tr>
+</table>
+</div>
+
+<!-- SVG: Protocol Comparison -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" width="800" height="200">
+    <text x="400" y="18" text-anchor="middle" fill="#1a1d21" font-size="14" font-weight="bold">FTP vs SFTP vs SCP</text>
+    <!-- FTP -->
+    <rect x="10" y="40" width="240" height="140" rx="8" fill="#f8fafc" stroke="#dc2626" stroke-width="2"/>
+    <text x="130" y="62" text-anchor="middle" fill="#dc2626" font-size="12" font-weight="bold">FTP (Insecure)</text>
+    <rect x="25" y="75" width="80" height="30" rx="4" fill="#0f3460"/><text x="65" y="94" text-anchor="middle" fill="#fff" font-size="9">Client</text>
+    <line x1="105" y1="90" x2="145" y2="90" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowRed)"/>
+    <rect x="150" y="75" width="80" height="30" rx="4" fill="#1e3a5f"/><text x="190" y="94" text-anchor="middle" fill="#fff" font-size="9">Server</text>
+    <text x="130" y="130" text-anchor="middle" fill="#6b7280" font-size="9">Data sent in PLAIN TEXT</text>
+    <text x="130" y="145" text-anchor="middle" fill="#dc2626" font-size="9">Anyone can read passwords!</text>
+    <text x="130" y="162" text-anchor="middle" fill="#6b7280" font-size="9">Port 21, No encryption</text>
+    <!-- SFTP -->
+    <rect x="280" y="40" width="240" height="140" rx="8" fill="#f8fafc" stroke="#16a34a" stroke-width="2"/>
+    <text x="400" y="62" text-anchor="middle" fill="#16a34a" font-size="12" font-weight="bold">SFTP (Encrypted)</text>
+    <rect x="295" y="75" width="60" height="30" rx="4" fill="#0f3460"/><text x="325" y="94" text-anchor="middle" fill="#fff" font-size="9">Client</text>
+    <rect x="375" y="70" width="50" height="40" rx="4" fill="#fbbf24" opacity="0.3"/><text x="400" y="94" text-anchor="middle" fill="#92400e" font-size="8">SSH</text>
+    <rect x="435" y="75" width="60" height="30" rx="4" fill="#1e3a5f"/><text x="465" y="94" text-anchor="middle" fill="#fff" font-size="9">Server</text>
+    <line x1="355" y1="90" x2="375" y2="90" stroke="#16a34a" stroke-width="2"/>
+    <line x1="425" y1="90" x2="435" y2="90" stroke="#16a34a" stroke-width="2"/>
+    <text x="400" y="130" text-anchor="middle" fill="#16a34a" font-size="9">All data encrypted via SSH tunnel</text>
+    <text x="400" y="145" text-anchor="middle" fill="#6b7280" font-size="9">SSH key or password auth</text>
+    <text x="400" y="162" text-anchor="middle" fill="#6b7280" font-size="9">Port 22, Full encryption</text>
+    <!-- SCP -->
+    <rect x="550" y="40" width="240" height="140" rx="8" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+    <text x="670" y="62" text-anchor="middle" fill="#2563eb" font-size="12" font-weight="bold">SCP (Fast + Encrypted)</text>
+    <rect x="565" y="75" width="60" height="30" rx="4" fill="#0f3460"/><text x="595" y="94" text-anchor="middle" fill="#fff" font-size="9">Client</text>
+    <line x1="625" y1="90" x2="645" y2="90" stroke="#2563eb" stroke-width="3"/>
+    <rect x="645" y="75" width="60" height="30" rx="4" fill="#1e3a5f"/><text x="675" y="94" text-anchor="middle" fill="#fff" font-size="9">Server</text>
+    <text x="670" y="130" text-anchor="middle" fill="#2563eb" font-size="9">Stream copy over SSH</text>
+    <text x="670" y="145" text-anchor="middle" fill="#6b7280" font-size="9">No directory listing, just copy</text>
+    <text x="670" y="162" text-anchor="middle" fill="#6b7280" font-size="9">Port 22, Encrypted stream</text>
+    <defs><marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/></marker></defs>
+</svg>
+<p class="diagram-caption">Figure 6: FTP sends plaintext, SFTP wraps in SSH tunnel, SCP streams over SSH</p>
+</div>
+
+<div class="card">
+<h3>Practical Commands</h3>
+<pre><code><span class="cmt"># SFTP - interactive file transfer</span>
+sftp user@192.168.1.100
+sftp&gt; put localfile.txt          <span class="cmt"># upload</span>
+sftp&gt; get remotefile.txt         <span class="cmt"># download</span>
+sftp&gt; ls /var/www/               <span class="cmt"># list remote dir</span>
+
+<span class="cmt"># SCP - quick one-shot copy</span>
+scp file.txt user@server:/tmp/               <span class="cmt"># upload</span>
+scp user@server:/var/log/syslog ./           <span class="cmt"># download</span>
+scp -r ./mydir/ user@server:/backup/         <span class="cmt"># recursive copy</span>
+
+<span class="cmt"># rsync - intelligent sync (only copies changes)</span>
+rsync -avz ./site/ user@server:/var/www/site/        <span class="cmt"># sync dir</span>
+rsync -avz --delete ./site/ user@server:/var/www/    <span class="cmt"># mirror (deletes extra files)</span>
+rsync -avzP largefile.zip user@server:/backup/       <span class="cmt"># with progress + resume</span>
+
+<span class="cmt"># FTP (insecure, avoid if possible)</span>
+ftp 192.168.1.100
+ftp&gt; binary                    <span class="cmt"># set binary mode for non-text files</span>
+ftp&gt; put file.zip
+ftp&gt; get file.zip</code></pre>
+
+<h4>rsync is the best tool for backups</h4>
+<pre><code><span class="cmt"># rsync over SSH with bandwidth limit and dry-run</span>
+rsync -avz --dry-run --bwlimit=1000 -e ssh ./data/ user@server:/backup/
+
+<span class="cmt"># Exclude patterns</span>
+rsync -avz --exclude='*.log' --exclude='.git' ./project/ user@server:/var/www/
+
+<span class="cmt"># Schedule with cron (backup every night at 2am)</span>
+<span class="cmt"># Add to crontab: crontab -e</span>
+0 2 * * * rsync -avz /home/web/profolio/ /home/web/backup-$(date +\%Y\%m\%d)/</code></pre>
+</div>
+</section>
+
+<!-- ===================== SECTION 8: SECURITY ===================== -->
+<section id="security">
+<h2>8. Network Security</h2>
+
+<h3>SSL/TLS &mdash; How Encryption Works</h3>
+
+<!-- SVG: TLS Handshake -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg" width="800" height="280">
+    <text x="400" y="18" text-anchor="middle" fill="#1a1d21" font-size="14" font-weight="bold">TLS Handshake Process</text>
+    <!-- Client -->
+    <rect x="20" y="40" width="100" height="35" rx="6" fill="#0f3460"/><text x="70" y="62" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">Client</text>
+    <!-- Server -->
+    <rect x="680" y="40" width="100" height="35" rx="6" fill="#1e3a5f"/><text x="730" y="62" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">Server</text>
+    <!-- Step 1: Client Hello -->
+    <line x1="120" y1="65" x2="680" y2="65" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+    <text x="400" y="58" text-anchor="middle" fill="#2563eb" font-size="9">1. Client Hello (supported ciphers, TLS version)</text>
+    <!-- Step 2: Server Hello -->
+    <line x1="680" y1="95" x2="120" y2="95" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+    <text x="400" y="90" text-anchor="middle" fill="#16a34a" font-size="9">2. Server Hello (chosen cipher + certificate)</text>
+    <!-- Step 3: Verify -->
+    <text x="400" y="120" text-anchor="middle" fill="#7c3aed" font-size="9">3. Client verifies certificate (CA chain)</text>
+    <!-- Step 4: Key Exchange -->
+    <line x1="120" y1="140" x2="680" y2="140" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowYellow)"/>
+    <text x="400" y="138" text-anchor="middle" fill="#92400e" font-size="9">4. Key Exchange (pre-master secret encrypted with server public key)</text>
+    <!-- Step 5: Both derive keys -->
+    <text x="400" y="165" text-anchor="middle" fill="#ea580c" font-size="9">5. Both sides derive session keys from shared secret</text>
+    <!-- Step 6: Encrypted -->
+    <rect x="120" y="185" width="560" height="40" rx="6" fill="#16a34a" opacity="0.1" stroke="#16a34a" stroke-width="2"/>
+    <text x="400" y="210" text-anchor="middle" fill="#16a34a" font-size="11" font-weight="bold">6. All subsequent data is encrypted with AES/ChaCha20</text>
+    <!-- Encrypted traffic indicator -->
+    <line x1="120" y1="245" x2="680" y2="245" stroke="#16a34a" stroke-width="3" stroke-dasharray="20,5"/>
+    <text x="400" y="268" text-anchor="middle" fill="#16a34a" font-size="9">Encrypted traffic: {"data": "..."} &mdash; no one can read it in transit</text>
+</svg>
+<p class="diagram-caption">Figure 7: TLS handshake establishes an encrypted tunnel before any data is sent</p>
+</div>
+
+<h3>Firewall Types</h3>
+<!-- SVG: Firewall -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" width="800" height="180">
+    <!-- Internet -->
+    <rect x="10" y="50" width="120" height="80" rx="8" fill="#dc2626" opacity="0.15" stroke="#dc2626" stroke-width="2"/>
+    <text x="70" y="85" text-anchor="middle" fill="#dc2626" font-size="12" font-weight="bold">Internet</text>
+    <text x="70" y="102" text-anchor="middle" fill="#6b7280" font-size="9">(Threats)</text>
+    <!-- Firewall -->
+    <rect x="200" y="30" width="120" height="120" rx="8" fill="#ea580c" opacity="0.15" stroke="#ea580c" stroke-width="2"/>
+    <text x="260" y="80" text-anchor="middle" fill="#ea580c" font-size="12" font-weight="bold">FIREWALL</text>
+    <text x="260" y="100" text-anchor="middle" fill="#ea580c" font-size="9">Packet Filter</text>
+    <text x="260" y="115" text-anchor="middle" fill="#ea580c" font-size="9">Stateful Inspection</text>
+    <text x="260" y="130" text-anchor="middle" fill="#ea580c" font-size="9">Application Layer</text>
+    <!-- Arrows -->
+    <line x1="130" y1="90" x2="200" y2="90" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowRed)"/>
+    <text x="165" y="83" text-anchor="middle" fill="#dc2626" font-size="8">BLOCK</text>
+    <line x1="320" y1="70" x2="400" y2="70" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowGreen)"/>
+    <text x="360" y="63" text-anchor="middle" fill="#16a34a" font-size="8">ALLOW</text>
+    <!-- LAN -->
+    <rect x="400" y="30" width="380" height="120" rx="8" fill="#16a34a" opacity="0.08" stroke="#16a34a" stroke-width="2"/>
+    <text x="590" y="55" text-anchor="middle" fill="#16a34a" font-size="12" font-weight="bold">Internal Network (LAN)</text>
+    <!-- Devices -->
+    <rect x="420" y="75" width="80" height="35" rx="4" fill="#0f3460"/><text x="460" y="96" text-anchor="middle" fill="#fff" font-size="9">Server</text>
+    <rect x="520" y="75" width="80" height="35" rx="4" fill="#0f3460"/><text x="560" y="96" text-anchor="middle" fill="#fff" font-size="9">PC</text>
+    <rect x="620" y="75" width="80" height="35" rx="4" fill="#0f3460"/><text x="660" y="96" text-anchor="middle" fill="#fff" font-size="9">Printer</text>
+    <rect x="720" y="75" width="50" height="35" rx="4" fill="#0f3460"/><text x="745" y="96" text-anchor="middle" fill="#fff" font-size="9">NAS</text>
+</svg>
+<p class="diagram-caption">Figure 8: Firewall sits between the internet and your internal network</p>
+</div>
+
+<div class="card">
+<h3>Firewall Rules (iptables / UFW)</h3>
+<pre><code><span class="cmt"># UFW (Uncomplicated Firewall) - Ubuntu/Debian</span>
+sudo ufw enable
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 22/tcp       <span class="cmt"># SSH</span>
+sudo ufw allow 80/tcp       <span class="cmt"># HTTP</span>
+sudo ufw allow 443/tcp      <span class="cmt"># HTTPS</span>
+sudo ufw status verbose
+
+<span class="cmt"># iptables (more detailed control)</span>
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT      <span class="cmt"># allow SSH</span>
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT       <span class="cmt"># allow HTTP</span>
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT      <span class="cmt"># allow HTTPS</span>
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -j DROP                            <span class="cmt"># drop everything else</span></code></pre>
+</div>
+
+<h3>SSH Security</h3>
+<div class="card">
+<pre><code><span class="cmt"># /etc/ssh/sshd_config hardening</span>
+PermitRootLogin no               <span class="cmt"># Don't allow root login</span>
+PasswordAuthentication no        <span class="cmt"># Keys only (no passwords)</span>
+Port 2222                        <span class="cmt"># Change default port</span>
+MaxAuthTries 3                   <span class="cmt"># Lock after 3 failed attempts</span>
+AllowUsers web admin             <span class="cmt"># Only specific users</span>
+
+<span class="cmt"># Generate SSH key pair</span>
+ssh-keygen -t ed25519 -C "your@email.com"
+
+<span class="cmt"># Copy key to server</span>
+ssh-copy-id -p 2222 user@server
+
+<span class="cmt"># SSH tunnel (forward local port through remote server)</span>
+ssh -L 3306:localhost:3306 user@remote-server
+<span class="cmt"># Now localhost:3306 connects to remote MySQL</span>
+
+<span class="cmt"># SSH jump host (bastion)</span>
+ssh -J jumpuser@bastion-server user@internal-server</code></pre>
+</div>
+
+<h3>VPN Overview</h3>
+<!-- SVG: VPN Tunnel -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 800 120" xmlns="http://www.w3.org/2000/svg" width="800" height="120">
+    <!-- Client -->
+    <rect x="20" y="30" width="100" height="50" rx="6" fill="#0f3460" stroke="#2563eb" stroke-width="2"/>
+    <text x="70" y="60" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">Your PC</text>
+    <!-- Public internet -->
+    <rect x="160" y="20" width="480" height="70" rx="6" fill="#f8fafc" stroke="#e2e4e9" stroke-dasharray="6,3"/>
+    <text x="400" y="38" text-anchor="middle" fill="#6b7280" font-size="9">Public Internet (insecure)</text>
+    <!-- VPN Tunnel -->
+    <rect x="130" y="35" width="540" height="40" rx="20" fill="#16a34a" opacity="0.15" stroke="#16a34a" stroke-width="2"/>
+    <text x="400" y="60" text-anchor="middle" fill="#16a34a" font-size="10" font-weight="bold">VPN Tunnel (Encrypted)</text>
+    <!-- Server -->
+    <rect x="680" y="30" width="100" height="50" rx="6" fill="#0f3460" stroke="#16a34a" stroke-width="2"/>
+    <text x="730" y="60" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">VPN Server</text>
+    <!-- LAN -->
+    <rect x="680" y="90" width="100" height="25" rx="4" fill="#1e3a5f" opacity="0.5"/>
+    <text x="730" y="107" text-anchor="middle" fill="#86efac" font-size="8">Internal LAN</text>
+</svg>
+<p class="diagram-caption">Figure 9: VPN creates an encrypted tunnel through the public internet</p>
+</div>
+
+<div class="card">
+<h3>Common Attacks &amp; Defenses</h3>
+<table>
+<tr><th>Attack</th><th>What It Does</th><th>Defense</th></tr>
+<tr><td><strong>Phishing</strong></td><td>Fake emails/sites steal credentials</td><td>2FA, email filters, user training</td></tr>
+<tr><td><strong>Brute Force</strong></td><td>Try every password combination</td><td>Rate limiting, fail2ban, strong passwords</td></tr>
+<tr><td><strong>DDoS</strong></td><td>Flood server with traffic</td><td>CDN, load balancer, rate limiting</td></tr>
+<tr><td><strong>Man-in-the-Middle</strong></td><td>Intercept communication</td><td>HTTPS/TLS, certificate pinning</td></tr>
+<tr><td><strong>SQL Injection</strong></td><td>Inject SQL via form inputs</td><td>Prepared statements, input validation</td></tr>
+<tr><td><strong>XSS</strong></td><td>Inject scripts into web pages</td><td>Output encoding, CSP headers</td></tr>
+<tr><td><strong>Port Scanning</strong></td><td>Discover open services</td><td>Firewall, close unused ports</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ===================== SECTION 9: HANDS-ON LABS ===================== -->
+<section id="labs">
+<h2>9. Hands-On Labs</h2>
+<p>Try these exercises on your own server (192.168.8.82). Each lab builds on the previous.</p>
+
+<div class="card success">
+<h3 class="collapsible open">Lab 1: Create a REST API</h3>
+<div class="collapsible-content open">
+<ol style="padding-left:1.5rem; margin:1rem 0;">
+    <li>Create the database:
+    <pre><code>/opt/lampp/bin/mysql -u root -e "CREATE DATABASE testapi;
+USE testapi;
+CREATE TABLE items (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  description TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);"</code></pre>
+    </li>
+    <li>Create <code>/opt/lampp/htdocs/folder/test-api/index.php</code> with the API code from Section 3 above.</li>
+    <li>Test with curl:
+    <pre><code>curl -X POST http://192.168.8.82/folder/test-api/index.php \
+  -H "Content-Type: application/json" \
+  -d '{"name":"My Item","description":"Test item"}'
+
+curl http://192.168.8.82/folder/test-api/index.php</code></pre>
+    </li>
+</ol>
+</div>
+</div>
+
+<div class="card success">
+<h3 class="collapsible">Lab 2: SNMP Monitoring</h3>
+<div class="collapsible-content">
+<ol style="padding-left:1.5rem; margin:1rem 0;">
+    <li>Install SNMP on your server:
+    <pre><code>sudo apt install snmpd snmp
+# Edit /etc/snmp/snmpd.conf</code></pre>
+    </li>
+    <li>Query localhost:
+    <pre><code>snmpget -v2c -c public localhost 1.3.6.1.2.1.1.1.0
+snmpwalk -v2c -c public localhost 1.3.6.1.2.1.1</code></pre>
+    </li>
+    <li>Try querying another device on your network (router, printer).</li>
+</ol>
+</div>
+</div>
+
+<div class="card success">
+<h3 class="collapsible">Lab 3: Send Email via SMTP</h3>
+<div class="collapsible-content">
+<ol style="padding-left:1.5rem; margin:1rem 0;">
+    <li>Test SMTP connection:
+    <pre><code>telnet smtp.gmail.com 587
+EHLO test
+STARTTLS</code></pre>
+    </li>
+    <li>Or use PHP&rsquo;s <code>mail()</code> function with LAMPP&rsquo;s sendmail configured.</li>
+    <li>Install PHPMailer: <code>composer require phpmailer/phpmailer</code></li>
+</ol>
+</div>
+</div>
+
+<div class="card success">
+<h3 class="collapsible">Lab 4: Secure File Transfer</h3>
+<div class="collapsible-content">
+<ol style="padding-left:1.5rem; margin:1rem 0;">
+    <li>Generate SSH keys: <code>ssh-keygen -t ed25519</code></li>
+    <li>Copy to server: <code>ssh-copy-id web@192.168.8.82</code></li>
+    <li>Transfer files:
+    <pre><code>scp file.txt web@192.168.8.82:/tmp/
+rsync -avz ./site/ web@192.168.8.82:/var/www/site/</code></pre>
+    </li>
+    <li>Set up automated backup with cron + rsync.</li>
+</ol>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<section style="border-top:1px solid var(--border); padding-top:2rem; text-align:center; color:var(--muted); font-size:0.9rem;">
+<p><strong>RFC References for deeper reading:</strong></p>
+<p>
+    <a href="https://datatracker.ietf.org/doc/html/rfc7231" target="_blank">RFC 7231 (HTTP/1.1)</a> &middot;
+    <a href="https://datatracker.ietf.org/doc/html/rfc7519" target="_blank">RFC 7519 (JWT)</a> &middot;
+    <a href="https://datatracker.ietf.org/doc/html/rfc3411" target="_blank">RFC 3411 (SNMPv3)</a> &middot;
+    <a href="https://datatracker.ietf.org/doc/html/rfc5321" target="_blank">RFC 5321 (SMTP)</a> &middot;
+    <a href="https://datatracker.ietf.org/doc/html/rfc4253" target="_blank">RFC 4253 (SSH)</a> &middot;
+    <a href="https://datatracker.ietf.org/doc/html/rfc8446" target="_blank">RFC 8446 (TLS 1.3)</a>
+</p>
+<p style="margin-top:1rem;">Built for learning purposes &mdash; Dante Lespoir</p>
+</section>
+
+</div><!-- /container -->
+
+<!-- JavaScript: Collapsible sections -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.collapsible').forEach(function(el) {
+        el.addEventListener('click', function() {
+            this.classList.toggle('open');
+            var content = this.nextElementSibling;
+            if (content && content.classList.contains('collapsible-content')) {
+                content.classList.toggle('open');
+            }
+        });
+    });
+
+    // Animate SVG elements when they scroll into view
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll('.animate-flow, .animate-fade').forEach(function(el) {
+                    el.style.animationPlayState = 'running';
+                });
+            }
+        });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.diagram-wrap').forEach(function(diagram) {
+        observer.observe(diagram);
+        // Pause animations until visible
+        diagram.querySelectorAll('.animate-flow, .animate-fade').forEach(function(el) {
+            el.style.animationPlayState = 'paused';
+        });
+    });
+});
+</script>
+
+</body>
+</html>
