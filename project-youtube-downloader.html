@@ -21,7 +21,7 @@
                 <h1>
                         <a href="index.html" style="color: inherit; text-decoration: none;">Dante Dominic Lespoir</a>
                 </h1>
-                <p class="tagline">Full-Stack Developer | Linux Administrator | Game Developer</p>
+                <p class="tagline">IT Student | Linux &amp; Self-Hosting Hobbyist | Learning Game Dev</p>
             </div>
 
             <div class="theme-switcher" role="group" aria-label="Theme switcher">
@@ -54,7 +54,7 @@
         <section class="hero hero-bg-youtube" aria-labelledby="hero-title">
             <div class="hero-content">
                 <h2 id="hero-title">YouTube Downloader</h2>
-                    <p>A desktop GUI application built in Python for seamless video downloading, playlist management, and metadata parsing.</p>
+                    <p>A small Python/tkinter desktop app for downloading videos and playlists with a simple GUI.</p>
             </div>
         </section>
 
@@ -63,7 +63,7 @@
                 <h2 id="overview">Project Overview</h2>
                 <div class="project-detail">
                     <p>
-                        This project solves the challenge of downloading high-fidelity video and audio media directly via a streamlined desktop graphical user interface. By combining Python's powerful scripting capabilities with standard interface toolkits, the application abstracts complex command-line streaming parameters into a clean, easy-to-configure layout.
+                        yt-dlp is great but typing long commands is annoying, so I built a GUI around it. Pick a video, choose quality, hit download.
                     </p>
 
                     <div class="project-info-grid">
@@ -79,28 +79,28 @@
                         <div class="info-box">
                             <h3>Key Features</h3>
                             <ul>
-                                <li>Batch Playlist Extraction</li>
-                                <li>Dynamic Resolution Selection</li>
-                                <li>Audio Conversion (.mp3)</li>
-                                <li>Live Progress Bar Metrics</li>
+                                <li>Playlist download</li>
+                                <li>Quality selection dropdown</li>
+                                <li>Audio conversion (mp3)</li>
+                                <li>Progress bar</li>
                             </ul>
                         </div>
                         <div class="info-box">
                             <h3>Development Goals</h3>
                             <ul>
-                                <li>Asynchronous Execution Threading</li>
-                                <li>Avoid Interface Freezes During Downloads</li>
-                                <li>Clean Error Validation Handlers</li>
-                                <li>Local Storage Configuration</li>
+                                <li>Threading to avoid freezes</li>
+                                <li>Download button disabled while running</li>
+                                <li>Basic error messages</li>
+                                <li>Save settings to file</li>
                             </ul>
                         </div>
                         <div class="info-box">
                             <h3>UX Focus</h3>
                             <ul>
-                                <li>Accessible Form Fields</li>
-                                <li>High Contrast Status Warnings</li>
-                                <li>Keyboard Tab Navigation</li>
-                                <li>Clear Output Directory Choices</li>
+                                <li>Simple input fields</li>
+                                <li>Clear status messages</li>
+                                <li>Tab navigation works</li>
+                                <li>Output folder picker</li>
                             </ul>
                         </div>
                     </div>
@@ -110,18 +110,18 @@
 
         <section class="content-section" aria-labelledby="features">
             <div class="container">
-                <h2 id="features">Implementation Highlights</h2>
+                <h2 id="features">What I Built</h2>
                 <div class="features-list">
                     <div class="feature-item">
-                        <h3>&#129525; Multi-Threaded Processing</h3>
+                        <h3>&#129525; Threading</h3>
                         <p>
-                            Implemented Python's `threading` library to isolate download loops from the primary UI loop. This keeps the application responsive, allowing users to safely pause downloads or monitor accurate data rates.
+                            Used Python's threading library so downloads run in the background without freezing the window.
                         </p>
                     </div>
                     <div class="feature-item">
-                        <h3>&#128736;&#65039; Dynamic Format Resolution Parsing</h3>
+                        <h3>&#128736;&#65039; Quality Picker</h3>
                         <p>
-                            Integrated backend hooks into `yt-dlp` to query streaming manifests synchronously, serving only available video payloads (e.g., 1080p, 720p) directly to the user's dropdown select box.
+                            Asked yt-dlp which resolutions a video has and filled the dropdown with them.
                         </p>
                     </div>
                 </div>
@@ -130,15 +130,15 @@
 
         <section class="content-section" aria-labelledby="learnings">
             <div class="container">
-                <h2 id="learnings">Key Technical Insights</h2>
+                <h2 id="learnings">What I've Picked Up</h2>
                 <div class="learnings-grid">
                     <div class="learning-card">
-                        <h3>Process Management</h3>
-                        <p>Mastered managing external runtime binaries like FFmpeg directly from system sub-processes while maintaining streams clean of memory leaks.</p>
+                        <h3>subprocess</h3>
+                        <p>Learned to launch FFmpeg from Python with subprocess and feed it yt-dlp output.</p>
                     </div>
                     <div class="learning-card">
-                        <h3>GUI State Patterns</h3>
-                        <p>Architected clean widget binding states to dynamically lock form controls during execution cycles to ensure pristine application flows.</p>
+                        <h3>tkinter Basics</h3>
+                        <p>Got the hang of disabling buttons while something is running so it can't be double-clicked.</p>
                     </div>
                 </div>
             </div>
