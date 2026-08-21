@@ -11,7 +11,7 @@
     --light-gray: #f0f1f3;
     --gray: #d8dbe0;
     --black: #1a1d21;
-    --muted: #6b7280;
+    --muted:      #4b5563;
     --blue: #2563eb;
     --blue-hover: #1d4ed8;
     --green: #16a34a;
@@ -267,6 +267,7 @@ nav {
 
 .theme-btn:hover {
     background-color: var(--blue);
+    color: #fff;
     transform: scale(1.1);
 }
 
@@ -342,17 +343,17 @@ nav {
 }
 
 .cta-button:hover {
-    background-color: transparent;
-    color: var(--blue);
+    background-color: var(--blue);
+    color: #fff;
     text-decoration: none;
 }
 
 /* project page hero backgrounds */
 .hero-bg-homelab { background: linear-gradient(135deg, #2d3436 0%, #0d1b2a 100%); }
-.hero-bg-youtube { background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%); }
-.hero-bg-game    { background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%); }
-.hero-bg-web     { background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); }
-.hero-bg-code    { background: linear-gradient(135deg, #27ae60 0%, #229954 100%); }
+.hero-bg-youtube { background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%); }
+.hero-bg-game    { background: linear-gradient(135deg, #475569 0%, #1e293b 100%); }
+.hero-bg-web     { background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%); }
+.hero-bg-code    { background: linear-gradient(135deg, #15803d 0%, #166534 100%); }
 
 /* -------------------------------------------
    8. About section
@@ -516,6 +517,16 @@ nav {
     box-shadow: 0 6px 20px var(--shadow-md);
 }
 
+.project-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--lg);
+    color: var(--blue);
+    background: var(--light-gray);
+    border-bottom: 1px solid var(--border);
+}
+
 /* card image areas with gradient backgrounds */
 .project-image {
     height: 220px;
@@ -647,7 +658,7 @@ nav {
 }
 
 .exp-badge--exploring {
-    background-color: #f97316;
+    background: #c2410c;
     color: #fff;
 }
 
@@ -671,7 +682,7 @@ nav {
 }
 
 .exp-badge {
-    background-color: var(--green);
+    background-color: #15803d;
     color: #fff;
     font-size: 0.7rem;
     font-weight: 700;
@@ -1078,7 +1089,7 @@ footer {
 }
 
 .footer-socials a {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--muted);
     transition: var(--transition);
     display: flex;
     align-items: center;
@@ -1088,13 +1099,13 @@ footer {
 }
 
 .footer-socials a:hover {
-    color: #fff;
+    color: var(--blue);
     transform: translateY(-3px);
 }
 
 footer p {
     margin: 0;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--muted);
     font-size: 0.85rem;
 }
 
@@ -1352,7 +1363,7 @@ footer p {
     --light-gray: #13151a;
     --gray: #2a2f3a;
     --black: #e6edf3;
-    --muted: #7d8590;
+    --muted: #9ca3af;
     --blue: #58a6ff;
     --blue-hover: #79c0ff;
     --border: #2a2f3a;
