@@ -521,10 +521,15 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--lg);
+    padding: 1rem 1rem 0.5rem;
     color: var(--blue);
     background: var(--light-gray);
     border-bottom: 1px solid var(--border);
+}
+
+.project-card-icon svg {
+    width: 28px;
+    height: 28px;
 }
 
 /* card image areas with gradient backgrounds */
@@ -552,14 +557,16 @@ nav {
 
 .hero-bg-github { background: linear-gradient(135deg, #24292e 0%, #0d1117 100%); }
 
-.project-content {
+.project-content,
+.project-card-body {
     padding: var(--lg);
     flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
-.project-content h3 {
+.project-content h3,
+.project-card-body h3 {
     color: var(--black);
     margin-bottom: var(--md);
     border: none;
