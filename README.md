@@ -1,3 +1,2 @@
 # Profolio
-Work in progress
-
+Last mass update August
